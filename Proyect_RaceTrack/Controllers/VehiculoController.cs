@@ -22,9 +22,9 @@ namespace Proyect_RaceTrack.Controllers
         // GET: Vehiculo
         public async Task<IActionResult> Index()
         {
-              return _context.Vehiculo != null ? 
-                          View(await _context.Vehiculo.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Vehiculo'  is null.");
+            return _context.Vehiculo != null ? 
+                        View(await _context.Vehiculo.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Vehiculo'  is null.");
         }
 
         // GET: Vehiculo/Details/5

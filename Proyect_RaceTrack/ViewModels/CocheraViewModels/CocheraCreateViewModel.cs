@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Proyect_RaceTrack.ViewModels.PistaViewModels.CocheraViewModels
+namespace Proyect_RaceTrack.ViewModels.CocheraViewModels
 {
     public class CocheraCreateViewModel
     {
