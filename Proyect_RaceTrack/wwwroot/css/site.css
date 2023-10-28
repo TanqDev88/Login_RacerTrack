@@ -1,0 +1,35 @@
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 17px;
+  background-image: url(https://wallpapercave.com/w/wp9193150.jpg);
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: rgb(213, 212, 247);
+  font-size: 1.1em;
+  font-family: sans-serif, Consolas;
+
+}
+
+header {
+  background-color: rgb(255, 0, 13);
+  height: 100px;
+}
+
+p{
+  color: #000;
+}
+
+.imagen-ajustada {
+  max-width: 100%;
+}
+
+div {
+  color: rgb(23, 18, 94);
+}
+
+.color-sky {
+background-image: url(https://wallpapercave.com/w/wp9193150.jpg);
+}

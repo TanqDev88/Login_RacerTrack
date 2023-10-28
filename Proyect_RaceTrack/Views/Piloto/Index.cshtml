@@ -1,0 +1,71 @@
+@model IEnumerable<Proyect_RaceTrack.Models.Piloto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PilotoNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PilotoApellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PilotoDni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PilotoNumeroLicencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PilotoExpedicion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PilotoPropietario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehiculo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotoNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotoApellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotoDni)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotoNumeroLicencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotoExpedicion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotoPropietario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vehiculo.VehiculoApellido)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PilotoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PilotoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PilotoId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

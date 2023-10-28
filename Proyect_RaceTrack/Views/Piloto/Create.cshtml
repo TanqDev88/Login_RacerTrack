@@ -1,0 +1,62 @@
+@model Proyect_RaceTrack.Models.Piloto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Piloto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PilotoNombre" class="control-label"></label>
+                <input asp-for="PilotoNombre" class="form-control" />
+                <span asp-validation-for="PilotoNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotoApellido" class="control-label"></label>
+                <input asp-for="PilotoApellido" class="form-control" />
+                <span asp-validation-for="PilotoApellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotoDni" class="control-label"></label>
+                <input asp-for="PilotoDni" class="form-control" />
+                <span asp-validation-for="PilotoDni" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotoNumeroLicencia" class="control-label"></label>
+                <input asp-for="PilotoNumeroLicencia" class="form-control" />
+                <span asp-validation-for="PilotoNumeroLicencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotoExpedicion" class="control-label"></label>
+                <input asp-for="PilotoExpedicion" class="form-control" />
+                <span asp-validation-for="PilotoExpedicion" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PilotoPropietario" /> @Html.DisplayNameFor(model => model.PilotoPropietario)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehiculoId" class="control-label"></label>
+                <select asp-for="VehiculoId" class ="form-control" asp-items="ViewBag.VehiculoId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
