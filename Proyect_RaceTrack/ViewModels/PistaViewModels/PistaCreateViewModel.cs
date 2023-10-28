@@ -8,7 +8,7 @@ using Proyect_RaceTrack.Utils;
 
 namespace Proyect_RaceTrack.ViewModels.PistaViewModels
 {
-    public class PistaCreateViewModels
+    public class PistaCreateViewModel
     {
 
         public int PistaId { get; set; }

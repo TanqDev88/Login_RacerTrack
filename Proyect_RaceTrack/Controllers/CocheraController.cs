@@ -7,157 +7,182 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
+// using Proyect_RaceTrack.ViewModels.PistaViewModels;
+using Proyect_RaceTrack.ViewModels.CocheraViewModels;
+using Proyect_RaceTrack.Services;
+using Proyect_RaceTrack.ViewModels;
 
 namespace Proyect_RaceTrack.Controllers
 {
     public class CocheraController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private ICocheraService _cocheraService;
 
-        public CocheraController(ApplicationDbContext context)
+        public CocheraController(ICocheraService cocheraService)
         {
-            _context = context;
+            _cocheraService = cocheraService;
         }
 
-        // GET: Cochera
-        public async Task<IActionResult> Index()
+        // GET: Hangar
+        public IActionResult Index(string nameFilterHan)
         {
-              return _context.Cochera != null ? 
-                          View(await _context.Cochera.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Cochera'  is null.");
+            var model = new CocheraIndexViewModel();
+            model.cocheras = _cocheraService.GetAll(nameFilterHan);
+
+            return View(model);
+
         }
 
-        // GET: Cochera/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Hangar/Details/5
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.Cochera == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var cochera = await _context.Cochera
-                .FirstOrDefaultAsync(m => m.CocheraId == id);
+            var cochera = _cocheraService.GetById(id.Value);
+            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (cochera == null)
             {
                 return NotFound();
             }
 
-            return View(cochera);
+            var viewModel = new CocheraDetailViewModel();
+            viewModel.CocheraNombre = cochera.CocheraNombre;
+            viewModel.CocheraNumero = cochera.CocheraNumero;
+            viewModel.CocheraSector = cochera.CocheraSector;
+            viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
+            viewModel.CocheraOficinas = cochera.CocheraOficinas;
+            //viewModel.Pistas = hangar.Pistas;
+
+            return View(viewModel);
         }
 
-        // GET: Cochera/Create
+        // GET: Hangar/Create
         public IActionResult Create()
         {
+            // ViewData["Pistas"] = new SelectList(_context.Pista.ToList(),"PistaId","PistaNombre");
+            //ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
             return View();
         }
 
-        // POST: Cochera/Create
+        // POST: Hangar/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CocheraId,CocheraNombre,CocheraNumero,CocheraSector,CocheraAptoMantenimiento,CocheraOficinas")] Cochera cochera)
+        public IActionResult Create([Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] CocheraCreateViewModel cocheraView)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cochera);
-                await _context.SaveChangesAsync();
+                // var pistas = _context.Pista.Where(x=> hangarView.PistaIds.Contains(x.PistaId)).ToList();
+
+                var cochera = new Cochera
+                {
+                    CocheraNombre = cocheraView.CocheraNombre,
+                    CocheraNumero = cocheraView.CocheraNumero,
+                    CocheraSector = cocheraView.CocheraSector,
+                    CocheraAptoMantenimiento = cocheraView.CocheraAptoMantenimiento,
+                    CocheraOficinas = cocheraView.CocheraOficinas,
+                    // Pistas = pistas
+
+                };
+
+
+                _cocheraService.Create(cochera);
                 return RedirectToAction(nameof(Index));
             }
-            return View(cochera);
+            return View(cocheraView);
         }
 
-        // GET: Cochera/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Hangar/Edit/5
+        public IActionResult Edit(int? id)
         {
-            if (id == null || _context.Cochera == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var cochera = await _context.Cochera.FindAsync(id);
+            var cochera = _cocheraService.GetById(id.Value);
             if (cochera == null)
             {
                 return NotFound();
             }
-            return View(cochera);
+            var viewModel = new CocheraEditViewModel();
+            viewModel.CocheraId = cochera.CocheraId;
+            viewModel.CocheraNombre = cochera.CocheraNombre;
+            viewModel.CocheraNumero = cochera.CocheraNumero;
+            viewModel.CocheraSector = cochera.CocheraSector;
+            viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
+            viewModel.CocheraOficinas = cochera.CocheraOficinas;
+
+            //ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
+            return View(viewModel);
         }
 
-        // POST: Cochera/Edit/5
+        // POST: Hangar/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CocheraId,CocheraNombre,CocheraNumero,CocheraSector,CocheraAptoMantenimiento,CocheraOficinas")] Cochera cochera)
+        public async Task<IActionResult> Edit(int id, [Bind("CocheraId,CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas")] Cochera cocheraView)
         {
-            if (id != cochera.CocheraId)
+            if (id != cocheraView.CocheraId)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(cochera);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CocheraExists(cochera.CocheraId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _cocheraService.Update(cocheraView);
                 return RedirectToAction(nameof(Index));
             }
-            return View(cochera);
+            return View(cocheraView);
         }
 
-        // GET: Cochera/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Hangar/Delete/5
+        public IActionResult Delete(int? id)
         {
-            if (id == null || _context.Cochera == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var cochera = await _context.Cochera
-                .FirstOrDefaultAsync(m => m.CocheraId == id);
+            var cochera = _cocheraService.GetById(id.Value);
             if (cochera == null)
             {
                 return NotFound();
             }
+            var viewModel = new CocheraDeleteViewModel();
+            viewModel.CocheraNombre = cochera.CocheraNombre;
+            viewModel.CocheraNumero = cochera.CocheraNumero;
+            viewModel.CocheraSector = cochera.CocheraSector;
+            viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
+            viewModel.CocheraOficinas = cochera.CocheraOficinas;
 
-            return View(cochera);
+            return View(viewModel);
+
         }
 
-        // POST: Cochera/Delete/5
+        // POST: Hangar/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            if (_context.Cochera == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Cochera'  is null.");
-            }
-            var cochera = await _context.Cochera.FindAsync(id);
+
+            var cochera = _cocheraService.GetById(id);
             if (cochera != null)
             {
-                _context.Cochera.Remove(cochera);
+                _cocheraService.Delete(id);
             }
-            
-            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CocheraExists(int id)
+        private bool AeronaveExists(int id)
         {
-          return (_context.Cochera?.Any(e => e.CocheraId == id)).GetValueOrDefault();
+            return _cocheraService.GetById(id) != null;
         }
     }
 }
