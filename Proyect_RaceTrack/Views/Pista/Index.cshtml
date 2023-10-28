@@ -1,0 +1,59 @@
+@model IEnumerable<Proyect_RaceTrack.Models.Pista>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PistaNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PistaCodigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PistaMaterial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PistaIluminacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PistaAprovisionamiento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PistaNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PistaCodigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PistaMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PistaIluminacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PistaAprovisionamiento)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PistaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PistaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PistaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+@model Proyect_RaceTrack.Models.Pista
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Pista</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PistaNombre" class="control-label"></label>
+                <input asp-for="PistaNombre" class="form-control" />
+                <span asp-validation-for="PistaNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PistaCodigo" class="control-label"></label>
+                <input asp-for="PistaCodigo" class="form-control" />
+                <span asp-validation-for="PistaCodigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PistaMaterial" class="control-label"></label>
+                <select asp-for="PistaMaterial" class="form-control"></select>
+                <span asp-validation-for="PistaMaterial" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PistaIluminacion" /> @Html.DisplayNameFor(model => model.PistaIluminacion)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PistaAprovisionamiento" /> @Html.DisplayNameFor(model => model.PistaAprovisionamiento)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
