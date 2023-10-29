@@ -2,7 +2,6 @@ using System.Security.Cryptography.X509Certificates;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
 using Microsoft.EntityFrameworkCore;
-
 namespace Proyect_RaceTrack.Services;
 
 public class VehiculoService : IVehiculoService

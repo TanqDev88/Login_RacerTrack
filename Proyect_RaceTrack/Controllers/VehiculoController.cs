@@ -57,18 +57,18 @@ namespace Proyect_RaceTrack.Controllers
             return View(viewModel);
         }
 
-        // GET: Aeronave/Create
+        // GET: Vehiculo/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Aeronave/Create
+        // POST: Vehiculo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("AeronaveTipo,AeronaveFabricacion,AeronaveMatricula")] VehiculoCreateViewModel vehiculoView)
+        public IActionResult Create([Bind("VehiculoTipo,VehiculoFabricacion,VehiculoMatricula")] VehiculoCreateViewModel vehiculoView)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace Proyect_RaceTrack.Controllers
             return View(vehiculoView);
         }
 
-        // GET: Aeronave/Edit/5
+        // GET: Vehiculo/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -109,15 +109,15 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
             return View(viewModel);
 
-            // return View(aeronave);
+            // return View(vehiculo);
         }
 
-        // POST: Aeronave/Edit/5
+        // POST: Vehiculo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("AeronaveId,AeronaveFabricacion,AeronaveTipo,AeronaveMatricula")] Vehiculo vehiculoView)
+        public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoFabricacion,VehiculoTipo,VehiculoMatricula")] Vehiculo vehiculoView)
         {
             if (id != vehiculoView.VehiculoId)
             {
@@ -133,7 +133,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
 
-        // GET: Aeronave/Delete/5
+        // GET: Vehiculo/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -156,14 +156,14 @@ namespace Proyect_RaceTrack.Controllers
             return View(viewModel);
         }
 
-        // POST: Aeronave/Delete/5
+        // POST: Vehiculo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
 
-            var aeronave = _vehiculoService.GetById(id);
-            if (aeronave != null)
+            var vehiculo = _vehiculoService.GetById(id);
+            if (vehiculo != null)
             {
                 _vehiculoService.Delete(id);
             }

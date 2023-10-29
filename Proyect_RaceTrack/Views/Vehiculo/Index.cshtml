@@ -1,4 +1,6 @@
-@model IEnumerable<Proyect_RaceTrack.Models.Vehiculo>
+@* @model IEnumerable<Proyect_RaceTrack.Models.Vehiculo> *@
+@using Proyect_RaceTrack.ViewModels.VehiculoViewModels;
+@model VehiculoIndexViewModel;
 
 @{
     ViewData["Title"] = "Index";
@@ -31,7 +33,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.vehiculos) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.VehiculoNombre)
