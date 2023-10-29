@@ -7,157 +7,216 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
+using Proyect_RaceTrack.ViewModels.PistaViewModels;
+using Proyect_RaceTrack.Services;
+using Proyect_RaceTrack.ViewModels;
+using Proyect_RaceTrack.ViewModels.VehiculoViewModels;
 
 namespace Proyect_RaceTrack.Controllers
 {
     public class VehiculoController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public VehiculoController(ApplicationDbContext context)
+        private IVehiculoService _vehiculoService;
+        public VehiculoController(IVehiculoService vehiculoService)
         {
-            _context = context;
+            _vehiculoService = vehiculoService;
+
         }
 
         // GET: Vehiculo
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string nameFilter)
         {
-            return _context.Vehiculo != null ? 
-                        View(await _context.Vehiculo.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Vehiculo'  is null.");
+            var model = new VehiculoIndexViewModel();
+            model.vehiculos = _vehiculoService.GetAll(nameFilter);
+
+            return View(model);
+
         }
 
         // GET: Vehiculo/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.Vehiculo == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var vehiculo = await _context.Vehiculo
-                .FirstOrDefaultAsync(m => m.VehiculoId == id);
+            var vehiculo = _vehiculoService.GetById(id.Value);
+            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (vehiculo == null)
             {
                 return NotFound();
             }
 
-            return View(vehiculo);
+            var viewModel = new VehiculoDetailViewModel();
+            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
+            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
+            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
+            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
+            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+            return View(viewModel);
         }
 
-        // GET: Vehiculo/Create
+        // GET: Aeronave/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Vehiculo/Create
+        // POST: Aeronave/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoTipo,VehiculoMatricula,VehiculoFabricacion")] Vehiculo vehiculo)
+        public IActionResult Create([Bind("AeronaveTipo,AeronaveFabricacion,AeronaveMatricula")] VehiculoCreateViewModel vehiculoView)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vehiculo);
-                await _context.SaveChangesAsync();
+                var vehiculo = new Vehiculo
+                {
+                    VehiculoNombre = vehiculoView.VehiculoNombre,
+                    VehiculoApellido = vehiculoView.VehiculoApellido,
+                    VehiculoMatricula = vehiculoView.VehiculoMatricula,
+                    VehiculoFabricacion = vehiculoView.VehiculoFabricacion,
+                    VehiculoTipo = vehiculoView.VehiculoTipo,
+                };
+
+                _vehiculoService.Create(vehiculo);
                 return RedirectToAction(nameof(Index));
             }
-            return View(vehiculo);
+            return View(vehiculoView);
         }
 
-        // GET: Vehiculo/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Aeronave/Edit/5
+        public IActionResult Edit(int? id)
         {
-            if (id == null || _context.Vehiculo == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var vehiculo = await _context.Vehiculo.FindAsync(id);
-            if (vehiculo == null)
-            {
-                return NotFound();
-            }
-            return View(vehiculo);
-        }
-
-        // POST: Vehiculo/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoTipo,VehiculoMatricula,VehiculoFabricacion")] Vehiculo vehiculo)
-        {
-            if (id != vehiculo.VehiculoId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(vehiculo);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!VehiculoExists(vehiculo.VehiculoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(vehiculo);
-        }
-
-        // GET: Vehiculo/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Vehiculo == null)
-            {
-                return NotFound();
-            }
-
-            var vehiculo = await _context.Vehiculo
-                .FirstOrDefaultAsync(m => m.VehiculoId == id);
+            var vehiculo = _vehiculoService.GetById(id.Value);
             if (vehiculo == null)
             {
                 return NotFound();
             }
 
-            return View(vehiculo);
+            var viewModel = new VehiculoEditViewModel();
+            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
+            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
+            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
+            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
+            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+            return View(viewModel);
+
+            // return View(aeronave);
         }
 
-        // POST: Vehiculo/Delete/5
+        // POST: Aeronave/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("AeronaveId,AeronaveFabricacion,AeronaveTipo,AeronaveMatricula")] Vehiculo vehiculoView)
+        {
+            if (id != vehiculoView.VehiculoId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _vehiculoService.Update(vehiculoView);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(vehiculoView);
+        }
+
+
+        // GET: Aeronave/Delete/5
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var vehiculo = _vehiculoService.GetById(id.Value);
+            if (vehiculo == null)
+            {
+                return NotFound();
+            }
+            var viewModel = new VehiculoDeleteViewModel();
+            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
+            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
+            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
+            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
+            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+
+            return View(viewModel);
+        }
+
+        // POST: Aeronave/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            if (_context.Vehiculo == null)
+
+            var aeronave = _vehiculoService.GetById(id);
+            if (aeronave != null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Vehiculo'  is null.");
+                _vehiculoService.Delete(id);
             }
-            var vehiculo = await _context.Vehiculo.FindAsync(id);
-            if (vehiculo != null)
-            {
-                _context.Vehiculo.Remove(vehiculo);
-            }
-            
-            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool VehiculoExists(int id)
         {
-          return (_context.Vehiculo?.Any(e => e.VehiculoId == id)).GetValueOrDefault();
+            return _vehiculoService.GetById(id) != null;
         }
+        //FUNCIONALIDAD /
+        // public IActionResult UpdatePrice(int? id)
+        // {
+        //     if (id == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     var aeronave = _vehiculoService.GetById(id.Value);
+        //     if (aeronave == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     var viewModel = new MenuUpdatePriceViewModel
+        //     {
+        //         AeronaveCosto = vehiculo.AeronaveCosto,
+        //         AeronaveId = vehiculo.AeronaveId,
+        //         AeronaveTipo = vehiculo.AeronaveTipo,
+        //     };
+
+        //     return View(viewModel);
+        // }
+
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public IActionResult UpdatePrice(MenuUpdatePriceViewModel model)
+        // {
+        //     var aeronave = _vehiculoService.GetById(model.AeronaveId);
+        //     if (aeronave == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     if (model.Cantidad > 0)
+        //     {
+        //         aeronave.AeronaveCosto = (model.Cantidad * aeronave.AeronaveCosto) + model.Instruccion;
+        //         _aeronaveService.Update(aeronave);
+
+        //     }
+
+        //     return RedirectToAction("Index");
+        // }
+
     }
 }

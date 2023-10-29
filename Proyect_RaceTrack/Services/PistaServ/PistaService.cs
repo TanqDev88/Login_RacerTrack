@@ -1,9 +1,8 @@
 using System.Security.Cryptography.X509Certificates;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
+
 namespace Proyect_RaceTrack.Services;
-
-
 
 public class PistaService : IPistaService
 {
@@ -30,8 +29,6 @@ public class PistaService : IPistaService
             }
     }
 
-
-
     public List<Pista> GetAll()
     {
         var query = from pista in _context.Pista select pista;
@@ -39,7 +36,7 @@ public class PistaService : IPistaService
     }
 //OJO QUE ESTO ESTA AGREGADO DE PRUEBA
     public List<Pista> GetAll(string nameFilterPista){
-        var query = from pista in _context.Pista select pista;
+    var query = from pista in _context.Pista select pista;
 
         if (!string.IsNullOrEmpty(nameFilterPista))
         {

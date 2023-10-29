@@ -6,9 +6,11 @@ using Proyect_RaceTrack.Models;
 using System.ComponentModel.DataAnnotations;
 using Proyect_RaceTrack.Utils;
 
-namespace Proyect_RaceTrack.ViewModels.PistaViewModels{
+//namespace Proyect_RaceTrack.ViewModels.PistaViewModels{
+namespace Proyect_RaceTrack.ViewModels
+        {
 
-public class PistaIndexViewModel{
+                public class PistaIndexViewModel{
         public List<Pista> pistas {get; set; } = new List<Pista>();
         public String? NameFilterPista { get; set; }
         public int PistaId { get; set; }

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
-// using Proyect_RaceTrack.ViewModels.PistaViewModels;
 using Proyect_RaceTrack.ViewModels.PistaViewModels;
 using Proyect_RaceTrack.Services;
 using Proyect_RaceTrack.ViewModels;
@@ -17,13 +16,14 @@ namespace Proyect_RaceTrack.Controllers
     public class PistaController : Controller
     {
         private IPistaService _pistaService;
-        public PistaController(IPistaService pistaService)
+        private ICocheraService _cocheraService;
+        public PistaController(IPistaService pistaService, ICocheraService cocheraService)
         {
             _pistaService = pistaService;
+            _cocheraService = cocheraService;
         }
-
         // GET: Pista
-        public IActionResult Index(string nameFilterPista, [Bind("PistaId,PistaNombre,PistaNomenclatura,PistaCapacidad,PistaIluminacion,PistaAprovisionamiento")] PistaIndexViewModel pistaView)
+        public IActionResult Index(string nameFilterPista, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento")] PistaIndexViewModel pistaView)
         {
             var model = new PistaIndexViewModel();
             model.pistas = _pistaService.GetAll(nameFilterPista);
@@ -53,7 +53,7 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PistaMaterial = pista.PistaMaterial;
             viewModel.PistaIluminacion = pista.PistaIluminacion;
             viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
-            // viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
+            //viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
 
             return View(viewModel);
         }
@@ -71,7 +71,7 @@ namespace Proyect_RaceTrack.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult Create([Bind("PistaId,PistaNombre,PistaNomenclatura,PistaCapacidad,PistaIluminacion,PistaAprovisionamiento,HangarIds")] PistaCreateViewModel pistaView)
+        public IActionResult Create([Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,CocheraIds")] PistaCreateViewModel pistaView)
         {
             //ModelState.Remove("Hangars"); No olvidar borrar esta validacion al realizar la relacion MaM
             if (ModelState.IsValid)
@@ -128,7 +128,7 @@ namespace Proyect_RaceTrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaNomenclatura,PistaCapacidad,PistaIluminacion,PistaAprovisionamiento")] Pista pistaView)
+        public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento")] Pista pistaView)
         {
             if (id != pistaView.PistaId)
             {

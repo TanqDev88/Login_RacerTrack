@@ -1,14 +1,24 @@
-@model IEnumerable<Proyect_RaceTrack.Models.Piloto>
+@model Proyect_RaceTrack.ViewModels.PilotoViewModels.PilotoIndexViewModel;
 
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
+<h1>Pilotos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">+ Piloto</a>
 </p>
+
+<div class="row">
+    <form method="get" asp-action="Index" asp-controller="Piloto">
+        <div class="col-6 form-group">
+            <input class="form-control" asp-for="NameFilter" />
+        </div>
+        <br>
+        <button class="btn btn-info" type="submit">Buscar</button>
+    </form>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -31,41 +41,43 @@
                 @Html.DisplayNameFor(model => model.PilotoPropietario)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vehiculo)
+                @Html.DisplayNameFor(model => model.VehiculoId)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PilotoNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PilotoApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PilotoDni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PilotoNumeroLicencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PilotoExpedicion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PilotoPropietario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehiculo.VehiculoApellido)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PilotoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PilotoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PilotoId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.pilotos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PilotoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PilotoApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PilotoDni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PilotoNumeroLicencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PilotoExpedicion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PilotoPropietario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehiculo.VehiculoTipo)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PilotoId" class="btn btn-warning">Modificar</a>
+                    <a asp-action="Details" asp-route-id="@item.PilotoId" class="btn btn-primary">Detalle</a>
+                    <a asp-action="Delete" asp-route-id="@item.PilotoId" class="btn btn-danger"
+                        onclick="return confirm('¿Esta seguro que quiere eliminar a este piloto?')">Eliminar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

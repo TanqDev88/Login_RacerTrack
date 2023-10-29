@@ -1,5 +1,6 @@
 using Proyect_RaceTrack.Models;
 namespace Proyect_RaceTrack.Services;
+
 public interface IPistaService{
     void Create(Pista obj);
     List<Pista> GetAll();
