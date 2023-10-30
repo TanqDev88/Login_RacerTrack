@@ -117,7 +117,7 @@ namespace Proyect_RaceTrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoFabricacion,VehiculoTipo,VehiculoMatricula")] Vehiculo vehiculoView)
+        public IActionResult Edit(int id, [Bind("VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] Vehiculo vehiculoView)
         {
             if (id != vehiculoView.VehiculoId)
             {
