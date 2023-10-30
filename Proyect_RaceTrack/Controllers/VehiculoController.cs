@@ -68,7 +68,7 @@ namespace Proyect_RaceTrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("VehiculoTipo,VehiculoFabricacion,VehiculoMatricula")] VehiculoCreateViewModel vehiculoView)
+        public IActionResult Create([Bind("VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] VehiculoCreateViewModel vehiculoView)
         {
             if (ModelState.IsValid)
             {
