@@ -56,7 +56,7 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
             viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
             viewModel.PilotoPropietario = piloto.PilotoPropietario;
-            //viewModel.Pi = instructor.InstructorEnActividad;
+            //viewModel.Pi = piloto.PilotoEnActividad;
             viewModel.VehiculoId = piloto.VehiculoId;
 
             return View(viewModel);
@@ -67,7 +67,7 @@ namespace Proyect_RaceTrack.Controllers
         {
             // ViewData["AeronaveId"] = new SelectList(_context.Aeronave, "AeronaveId", "AeronaveTipo",  "instructor.AeronaveId");
             // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveId", "AeronaveTipo",  "instructor.AeronaveId", "nameFilter");
-            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "AeronaveId", "AeronaveTipo", "nameFilter");
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
             // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveId", "instructor.AeronaveId", "nameFilter");
             // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveTipo",  "instructor.AeronaveId", "nameFilter");
             return View();
