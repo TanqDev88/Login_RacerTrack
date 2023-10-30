@@ -8,174 +8,191 @@ using Microsoft.EntityFrameworkCore;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
 using Proyect_RaceTrack.ViewModels.PilotoViewModels;
+using Proyect_RaceTrack.Services;
+using Proyect_RaceTrack.ViewModels;
 
 namespace Proyect_RaceTrack.Controllers
 {
     public class PilotoController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public PilotoController(ApplicationDbContext context)
+        private readonly IPilotoService _pilotoService;
+        private readonly IVehiculoService _vehiculoService;
+        public PilotoController(IPilotoService pilotoService, IVehiculoService vehiculoService)
         {
-            _context = context;
+            _pilotoService = pilotoService;
+            _vehiculoService = vehiculoService;
         }
 
         // GET: Piloto
-        public async Task<IActionResult> Index(string nameFilter)
+        public IActionResult Index(string nameFilterIns)
         {
-            var query = from piloto in _context.Piloto.Include(i => i.Vehiculo) select piloto;
-
-            if (!string.IsNullOrEmpty(nameFilter))
-            {
-                query = query.Where(x => x.PilotoNombre.Contains(nameFilter) || x.PilotoApellido.Contains(nameFilter) || x.PilotoDni.ToString() == nameFilter);
-            }
+            // var query = from instructor in _context.Instructor.Include(i => i.Aeronave) select instructor;
 
             var model = new PilotoIndexViewModel();
-            model.pilotos = await query.ToListAsync();
+            model.pilotos = _pilotoService.GetAll(nameFilterIns);
 
-            return _context.Piloto != null ?
-            View(model) :
-            Problem("Entity set 'AeronaveContex.Aeronave' is null.");
+            return View(model);
 
         }
 
         // GET: Piloto/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.Piloto == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var piloto = await _context.Piloto
-                .Include(p => p.Vehiculo)
-                .FirstOrDefaultAsync(m => m.PilotoId == id);
+            var piloto = _pilotoService.GetById(id.Value);
+            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (piloto == null)
             {
                 return NotFound();
             }
+            var viewModel = new PilotoDetailViewModel();
+            viewModel.PilotoNombre = piloto.PilotoNombre;
+            viewModel.PilotoApellido = piloto.PilotoApellido;
+            viewModel.PilotoDni = piloto.PilotoDni;
+            viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
+            viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
+            viewModel.PilotoPropietario = piloto.PilotoPropietario;
+            //viewModel.Pi = instructor.InstructorEnActividad;
+            viewModel.VehiculoId = piloto.VehiculoId;
 
-            return View(piloto);
+            return View(viewModel);
         }
 
         // GET: Piloto/Create
         public IActionResult Create()
         {
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido");
+            // ViewData["AeronaveId"] = new SelectList(_context.Aeronave, "AeronaveId", "AeronaveTipo",  "instructor.AeronaveId");
+            // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveId", "AeronaveTipo",  "instructor.AeronaveId", "nameFilter");
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "AeronaveId", "AeronaveTipo", "nameFilter");
+            // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveId", "instructor.AeronaveId", "nameFilter");
+            // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveTipo",  "instructor.AeronaveId", "nameFilter");
             return View();
         }
 
-        // POST: Piloto/Create
+        // POST: Instructor/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario,VehiculoId")] Piloto piloto)
+        public IActionResult Create([Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietar, VehiculoId")] PilotoCreateViewModel pilotoView)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(piloto);
-                await _context.SaveChangesAsync();
+                var instructor = new Piloto
+                {
+                    PilotoNombre = pilotoView.PilotoNombre,
+                    PilotoApellido = pilotoView.PilotoApellido,
+                    PilotoDni = pilotoView.PilotoDni,
+                    //PilotoTipoLicencia = pilotoView.InstructorTipoLicencia,
+                    PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia,
+                    PilotoExpedicion = pilotoView.PilotoExpedicion,
+                    //PilotoEnActividad = pilotoView.PilotoEnActividad,
+                    VehiculoId = pilotoView.VehiculoId
+
+                };
+                _pilotoService.Create(instructor);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido", piloto.VehiculoId);
-            return View(piloto);
+            // ViewData["AeronaveId"] = new SelectList(_context.Aeronave, "AeronaveId", "TipoAeronave",  "instructor.AeronaveId");
+            return View(pilotoView);
         }
 
-        // GET: Piloto/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Instructor/Edit/5      
+        public IActionResult Edit(int? id)
         {
-            if (id == null || _context.Piloto == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var piloto = await _context.Piloto.FindAsync(id);
-            if (piloto == null)
-            {
-                return NotFound();
-            }
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido", piloto.VehiculoId);
-            return View(piloto);
-        }
-
-        // POST: Piloto/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario,VehiculoId")] Piloto piloto)
-        {
-            if (id != piloto.PilotoId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(piloto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PilotoExists(piloto.PilotoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido", piloto.VehiculoId);
-            return View(piloto);
-        }
-
-        // GET: Piloto/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Piloto == null)
-            {
-                return NotFound();
-            }
-
-            var piloto = await _context.Piloto
-                .Include(p => p.Vehiculo)
-                .FirstOrDefaultAsync(m => m.PilotoId == id);
+            var piloto = _pilotoService.GetById(id.Value);
             if (piloto == null)
             {
                 return NotFound();
             }
 
-            return View(piloto);
+            var viewModel = new PilotoEditViewModel();
+            viewModel.PilotoNombre = piloto.PilotoNombre;
+            viewModel.PilotoApellido = piloto.PilotoApellido;
+            viewModel.PilotoDni = piloto.PilotoDni;
+            viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
+            viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
+            viewModel.PilotoPropietario = piloto.PilotoPropietario;
+            //viewModel.Pi = instructor.InstructorEnActividad;
+            viewModel.VehiculoId = piloto.VehiculoId;
+
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "AeronaveId", "AeronaveTipo", "nameFilter");
+            return View(viewModel);
         }
 
-        // POST: Piloto/Delete/5
+        // POST: Instructor/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietar,VehiculoId")] Piloto pilotoView)
+        {
+            if (id != pilotoView.VehiculoId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _pilotoService.Update(pilotoView);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(pilotoView);
+        }
+
+        // GET: Instructor/Delete/5
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var piloto = _pilotoService.GetById(id.Value);
+            if (piloto == null)
+            {
+                return NotFound();
+            }
+            var viewModel = new PilotoDeleteViewModel();
+            viewModel.PilotoNombre = piloto.PilotoNombre;
+            viewModel.PilotoApellido = piloto.PilotoApellido;
+            viewModel.PilotoDni = piloto.PilotoDni;
+            viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
+            viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
+            viewModel.PilotoPropietario = piloto.PilotoPropietario;
+            //viewModel.Pi = instructor.InstructorEnActividad;
+            viewModel.VehiculoId = piloto.VehiculoId;
+
+            return View(viewModel);
+        }
+
+        // POST: Instructor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            if (_context.Piloto == null)
+
+            var aeronave = _pilotoService.GetById(id);
+            if (aeronave != null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Piloto'  is null.");
+                _pilotoService.Delete(id);
             }
-            var piloto = await _context.Piloto.FindAsync(id);
-            if (piloto != null)
-            {
-                _context.Piloto.Remove(piloto);
-            }
-            
-            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PilotoExists(int id)
+        private bool AeronaveExists(int id)
         {
-          return (_context.Piloto?.Any(e => e.PilotoId == id)).GetValueOrDefault();
+            return _pilotoService.GetById(id) != null;
         }
     }
 }

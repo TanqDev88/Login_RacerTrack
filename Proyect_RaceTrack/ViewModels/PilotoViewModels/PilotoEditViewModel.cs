@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Proyect_RaceTrack.Models;
 
-namespace herramientas_parcial1_OliveraJorgeDaniel.ViewModels.PilotoViewModels
+namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 {
     public class PilotoEditViewModel
     {
