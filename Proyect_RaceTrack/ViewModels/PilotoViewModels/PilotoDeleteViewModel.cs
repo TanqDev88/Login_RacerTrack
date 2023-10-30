@@ -46,6 +46,7 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
         public int VehiculoId { get; set; }
 
         //public int VehiculoTipo { get; set; }
-        //public virtual Vehiculo? Vehiculo { get; set; }
+        public virtual Vehiculo? Vehiculo { get; set; }
+
     }
 }
