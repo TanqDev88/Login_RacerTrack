@@ -1,4 +1,5 @@
-@model IEnumerable<Proyect_RaceTrack.Models.Pista>
+@using Proyect_RaceTrack.ViewModels.PistaViewModels;
+@model PistaIndexViewModel;
 
 @{
     ViewData["Title"] = "Index";
@@ -31,7 +32,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.pistas) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.PistaNombre)

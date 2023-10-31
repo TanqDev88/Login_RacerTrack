@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Proyect_RaceTrack.Models;
 using System.ComponentModel.DataAnnotations;
 
+//namespace Proyect_RaceTrack.ViewModels.PistaViewModels{
 namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 {
     public class PilotoIndexViewModel
