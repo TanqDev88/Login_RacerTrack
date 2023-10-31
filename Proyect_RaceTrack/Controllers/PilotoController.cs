@@ -125,7 +125,8 @@ namespace Proyect_RaceTrack.Controllers
             //viewModel.Pi = instructor.InstructorEnActividad;
             viewModel.VehiculoId = piloto.VehiculoId;
 
-            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "AeronaveId", "AeronaveTipo", "nameFilter");
+            //ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "AeronaveId", "AeronaveTipo", "nameFilter");
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
             return View(viewModel);
         }
 
