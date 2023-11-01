@@ -6,7 +6,7 @@ using Proyect_RaceTrack.Models;
 using System.ComponentModel.DataAnnotations;
 using Proyect_RaceTrack.Utils;
 
-namespace Proyect_RaceTrack.ViewModels;
+namespace Proyect_RaceTrack.ViewModels.PistaViewModels;
 
 public class PistaDetailViewModel{
 
