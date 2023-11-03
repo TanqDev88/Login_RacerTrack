@@ -46,6 +46,5 @@ namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
 
         public DateTime VehiculoFabricacion { get; set; }
         public ICollection<Piloto> PilotoList { get; set; } = new List<Piloto>();
-
     }
 }

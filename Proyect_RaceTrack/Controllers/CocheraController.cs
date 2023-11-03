@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
-// using Proyect_RaceTrack.ViewModels.PistaViewModels;
 using Proyect_RaceTrack.ViewModels.CocheraViewModels;
 using Proyect_RaceTrack.Services;
 using Proyect_RaceTrack.ViewModels;
+using Proyect_RaceTrack.ViewModels.PistaViewModels;
 
 namespace Proyect_RaceTrack.Controllers
 {
@@ -126,7 +126,7 @@ namespace Proyect_RaceTrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CocheraId,CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas")] Cochera cocheraView)
+        public IActionResult Edit(int id, [Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] Cochera cocheraView)
         {
             if (id != cocheraView.CocheraId)
             {

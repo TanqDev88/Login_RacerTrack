@@ -1,15 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+//using Proyect_RaceTrack.ViewModels;
+//using Proyect_RaceTrack.ViewModels.PistaViewModels;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
-using Proyect_RaceTrack.ViewModels.PistaViewModels;
+
 using Proyect_RaceTrack.Services;
-using Proyect_RaceTrack.ViewModels;
+
 using Proyect_RaceTrack.ViewModels.VehiculoViewModels;
 
 namespace Proyect_RaceTrack.Controllers
@@ -107,6 +110,7 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
             viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
             viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+
             return View(viewModel);
 
             // return View(vehiculo);
@@ -117,7 +121,7 @@ namespace Proyect_RaceTrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] Vehiculo vehiculoView)
+        public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] Vehiculo vehiculoView)
         {
             if (id != vehiculoView.VehiculoId)
             {
@@ -129,6 +133,7 @@ namespace Proyect_RaceTrack.Controllers
                 _vehiculoService.Update(vehiculoView);
                 return RedirectToAction(nameof(Index));
             }
+            return RedirectToAction(nameof(Index));
             return View(vehiculoView);
         }
 
