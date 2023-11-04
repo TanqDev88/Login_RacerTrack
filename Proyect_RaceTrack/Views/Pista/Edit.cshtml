@@ -26,8 +26,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="PistaMaterial" class="control-label"></label>
-                <select asp-for="PistaMaterial" class="form-control"></select>
-                <span asp-validation-for="PistaMaterial" class="text-danger"></span>
+                <select asp-for="PistaMaterial" class="form-control">
+                    <option value="0">Cesped</option>
+                    <option value="1">Grava</option>
+                    <option value="2">Asfalto</option>
+                    <option value="3">Hormigon</option>
+                </select>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
