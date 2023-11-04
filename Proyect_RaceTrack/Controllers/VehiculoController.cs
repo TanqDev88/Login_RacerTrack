@@ -103,17 +103,7 @@ namespace Proyect_RaceTrack.Controllers
             {
                 return NotFound();
             }
-
-            var viewModel = new VehiculoEditViewModel();
-            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
-            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
-            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
-            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
-            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
-
-            return View(viewModel);
-
-            // return View(vehiculo);
+            return View(vehiculo);
         }
 
         // POST: Vehiculo/Edit/5
@@ -121,20 +111,35 @@ namespace Proyect_RaceTrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] Vehiculo vehiculoView)
+        public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] Vehiculo vehiculo)
         {
-            if (id != vehiculoView.VehiculoId)
+            if (id != vehiculo.VehiculoId)
             {
                 return NotFound();
             }
-
+            //ModelState.Remove("Locales");
+            //ModelState.Remove("Talles");
             if (ModelState.IsValid)
             {
-                _vehiculoService.Update(vehiculoView);
+                try
+                {
+                    _vehiculoService.Update(vehiculo);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!VehiculoExists(vehiculo.VehiculoId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
-            return View(vehiculoView);
+
+            return View(vehiculo);
         }
 
 
