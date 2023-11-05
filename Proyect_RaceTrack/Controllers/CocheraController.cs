@@ -109,16 +109,7 @@ namespace Proyect_RaceTrack.Controllers
             {
                 return NotFound();
             }
-            var viewModel = new CocheraEditViewModel();
-            viewModel.CocheraId = cochera.CocheraId;
-            viewModel.CocheraNombre = cochera.CocheraNombre;
-            viewModel.CocheraNumero = cochera.CocheraNumero;
-            viewModel.CocheraSector = cochera.CocheraSector;
-            viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
-            viewModel.CocheraOficinas = cochera.CocheraOficinas;
-
-            //ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
-            return View(viewModel);
+            return View(cochera);
         }
 
         // POST: Hangar/Edit/5
@@ -126,19 +117,35 @@ namespace Proyect_RaceTrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] Cochera cocheraView)
+        public IActionResult Edit(int id, [Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] Cochera cochera)
         {
-            if (id != cocheraView.CocheraId)
+            if (id != cochera.CocheraId)
             {
                 return NotFound();
             }
-
+            //ModelState.Remove("Locales");
+            //ModelState.Remove("Talles");
             if (ModelState.IsValid)
             {
-                _cocheraService.Update(cocheraView);
+                try
+                {
+                    _cocheraService.Update(cochera);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CocheraExists(cochera.CocheraId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cocheraView);
+
+            return View(cochera);
         }
 
         // GET: Hangar/Delete/5
@@ -180,7 +187,7 @@ namespace Proyect_RaceTrack.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AeronaveExists(int id)
+        private bool CocheraExists(int id)
         {
             return _cocheraService.GetById(id) != null;
         }

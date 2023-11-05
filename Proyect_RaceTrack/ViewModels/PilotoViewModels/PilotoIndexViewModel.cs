@@ -10,8 +10,7 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 {
     public class PilotoIndexViewModel
     {
-        public List<Piloto> pilotos { get; set; } = new List<Piloto>();
-        public String? NameFilter { get; set; }
+        public String? NameFilterIns { get; set; }
         public int PilotoId { get; set; }
 
         [Display(Name = "Nombre")]
@@ -45,5 +44,6 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 
         [Display(Name = "Vehiculo asignado")]
         public int VehiculoId { get; set; }
+        public List<Piloto> pilotos { get; set; } = new List<Piloto>();
     }
 }

@@ -96,6 +96,32 @@ namespace Proyect_RaceTrack.Controllers
 
         // GET: Pista/Edit/5
 
+        // public IActionResult Edit(int? id)
+        // {
+        //     if (id == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     var pista = _pistaService.GetById(id.Value);
+        //     if (pista == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     var viewModel = new PistaEditViewModel();
+        //     viewModel.PistaId = pista.PistaId;
+        //     viewModel.PistaNombre = pista.PistaNombre;
+        //     viewModel.PistaCodigo = pista.PistaCodigo;
+        //     viewModel.PistaMaterial = pista.PistaMaterial;
+        //     viewModel.PistaIluminacion = pista.PistaIluminacion;
+        //     viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
+        //     //viewModel.Hangars = pista.Hangars;
+        //     // viewModel.HangarIds = pista.HangarsIds;
+        //     // viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
+
+        //     //ViewData["Hangars"] = new SelectList(_hangarService.GetAll(), "HangarId", "HangarNombre", "nameFilterHan");
+        //     return View(viewModel);
+        // }
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -104,23 +130,12 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var pista = _pistaService.GetById(id.Value);
+            ViewData["CocheraId"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "VehiculoTipo", "nameFilter");
             if (pista == null)
             {
                 return NotFound();
             }
-            var viewModel = new PistaEditViewModel();
-            viewModel.PistaId = pista.PistaId;
-            viewModel.PistaNombre = pista.PistaNombre;
-            viewModel.PistaCodigo = pista.PistaCodigo;
-            viewModel.PistaMaterial = pista.PistaMaterial;
-            viewModel.PistaIluminacion = pista.PistaIluminacion;
-            viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
-            //viewModel.Hangars = pista.Hangars;
-            // viewModel.HangarIds = pista.HangarsIds;
-            // viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
-
-            //ViewData["Hangars"] = new SelectList(_hangarService.GetAll(), "HangarId", "HangarNombre", "nameFilterHan");
-            return View(viewModel);
+            return View(pista);
         }
 
         // POST: Pista/Edit/5
@@ -128,19 +143,35 @@ namespace Proyect_RaceTrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento")] Pista pistaView)
+        public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,CocheraIds")] Pista pista)
         {
-            if (id != pistaView.PistaId)
+            if (id != pista.PistaId)
             {
                 return NotFound();
             }
-
+            //ModelState.Remove("Locales");
+            //ModelState.Remove("Talles");
             if (ModelState.IsValid)
             {
-                _pistaService.Update(pistaView);
+                try
+                {
+                    _pistaService.Update(pista);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PistaExists(pista.PistaId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(pistaView);
+
+            return View(pista);
         }
 
         // GET: Pista/Delete/5
@@ -184,7 +215,7 @@ namespace Proyect_RaceTrack.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AeronaveExists(int id)
+        private bool PistaExists(int id)
         {
             return _pistaService.GetById(id) != null;
         }
