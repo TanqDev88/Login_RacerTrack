@@ -22,11 +22,11 @@ public class VehiculoService : IVehiculoService
     public void Delete(int id)
     {
         var obj = GetById(id);
-            if (obj != null)
-            {
-                _context.Vehiculo.Remove(obj);
-                _context.SaveChanges();
-            }
+        if (obj != null)
+        {
+            _context.Vehiculo.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 
     public List<Vehiculo> GetAll()
@@ -34,13 +34,14 @@ public class VehiculoService : IVehiculoService
         var query = from vehiculo in _context.Vehiculo select vehiculo;
         return query.ToList();
     }
-//OJO QUE ESTO ESTA AGREGADO DE PRUEBA
-    public List<Vehiculo> GetAll(string nameFilter){
+    //OJO QUE ESTO ESTA AGREGADO DE PRUEBA
+    public List<Vehiculo> GetAll(string NameFilterVeh)
+    {
         var query = from vehiculo in _context.Vehiculo select vehiculo;
 
-        if (!string.IsNullOrEmpty(nameFilter))
+        if (!string.IsNullOrEmpty(NameFilterVeh))
         {
-            query = query.Where(x => x.VehiculoTipo.Contains(nameFilter) || x.VehiculoMatricula.Contains(nameFilter));
+            query = query.Where(x => x.VehiculoTipo.Contains(NameFilterVeh) || x.VehiculoMatricula.Contains(NameFilterVeh));
         }
         return query.ToList();
 
@@ -53,9 +54,9 @@ public class VehiculoService : IVehiculoService
 
     public Vehiculo? GetById(int id)
     {
-            var vehiculo = _context.Vehiculo
-                .FirstOrDefault(m => m.VehiculoId == id);
-            return vehiculo;  
+        var vehiculo = _context.Vehiculo
+            .FirstOrDefault(m => m.VehiculoId == id);
+        return vehiculo;
     }
 
     public void Update(Vehiculo obj)

@@ -27,10 +27,10 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Vehiculo
-        public IActionResult Index(string nameFilter)
+        public IActionResult Index(string NameFilterVeh)
         {
             var model = new VehiculoIndexViewModel();
-            model.vehiculos = _vehiculoService.GetAll(nameFilter);
+            model.vehiculos = _vehiculoService.GetAll(NameFilterVeh);
 
             return View(model);
 
