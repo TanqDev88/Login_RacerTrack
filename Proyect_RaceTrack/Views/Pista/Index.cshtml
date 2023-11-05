@@ -10,6 +10,17 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<div class="row">
+    <form method="get" asp-action="Index" asp-controller="Pista">
+        <div class="col-6 form-group">
+            <input class="form-control" asp-for="NameFilterPista" />
+        </div>
+        <br>
+        <button class="btn btn-info" type="submit">Buscar</button>
+    </form>
+</div>
+
 <table class="table">
     <thead>
         <tr>
