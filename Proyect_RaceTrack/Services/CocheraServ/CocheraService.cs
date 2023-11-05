@@ -21,11 +21,11 @@ public class CocheraService : ICocheraService
     public void Delete(int id)
     {
         var obj = GetById(id);
-            if (obj != null)
-            {
-                _context.Cochera.Remove(obj);
-                _context.SaveChanges();
-            }
+        if (obj != null)
+        {
+            _context.Cochera.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 
     public List<Cochera> GetAll()
@@ -34,12 +34,13 @@ public class CocheraService : ICocheraService
         return query.ToList();
     }
 
-    public List<Cochera> GetAll(string nameFilterHan){
+    public List<Cochera> GetAll(string NameFilterCoc)
+    {
         var query = from cochera in _context.Cochera select cochera;
 
-        if (!string.IsNullOrEmpty(nameFilterHan))
+        if (!string.IsNullOrEmpty(NameFilterCoc))
         {
-                query = query.Where(x => x.CocheraNombre.Contains(nameFilterHan) || x.CocheraNumero.ToString() == nameFilterHan);
+            query = query.Where(x => x.CocheraNombre.Contains(NameFilterCoc) || x.CocheraNumero.ToString() == NameFilterCoc);
         }
         return query.ToList();
 
@@ -53,9 +54,9 @@ public class CocheraService : ICocheraService
 
     public Cochera? GetById(int id)
     {
-            var cochera = _context.Cochera
-                .FirstOrDefault(m => m.CocheraId == id);
-            return cochera;  
+        var cochera = _context.Cochera
+            .FirstOrDefault(m => m.CocheraId == id);
+        return cochera;
     }
 
     public void Update(Cochera obj)

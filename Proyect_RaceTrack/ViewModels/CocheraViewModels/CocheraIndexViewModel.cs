@@ -10,8 +10,8 @@ namespace Proyect_RaceTrack.ViewModels.CocheraViewModels
     {
 
         //public List<Cochera> cocheras { get; set; } = new List<Cochera>();
-        public List<Cochera> cocheras {get; set;} = new List<Cochera>();
-        public String? NameFilterHan { get; set; }
+        public List<Cochera> cocheras { get; set; } = new List<Cochera>();
+        public String? NameFilterCoc { get; set; }
         public int CocheraId { get; set; }
         public string? CocheraNombre { get; set; }
         public int CocheraNumero { get; set; }

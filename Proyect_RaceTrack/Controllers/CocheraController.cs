@@ -24,10 +24,10 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Hangar
-        public IActionResult Index(string nameFilterHan)
+        public IActionResult Index(string NameFilterCoc)
         {
             var model = new CocheraIndexViewModel();
-            model.cocheras = _cocheraService.GetAll(nameFilterHan);
+            model.cocheras = _cocheraService.GetAll(NameFilterCoc);
 
             return View(model);
 

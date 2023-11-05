@@ -8,7 +8,7 @@ namespace Proyect_RaceTrack.Models
     public class Cochera
     {
         // public List<Cochera> cocheras { get; set; } = new List<Cochera>();
-        // public String? NameFilterHan { get; set; }
+        // public String? NameFilterCoc { get; set; }
         public int CocheraId { get; set; }
         public string? CocheraNombre { get; set; }
         public int CocheraNumero { get; set; }

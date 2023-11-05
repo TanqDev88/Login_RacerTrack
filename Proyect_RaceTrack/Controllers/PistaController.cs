@@ -119,7 +119,7 @@ namespace Proyect_RaceTrack.Controllers
         //     // viewModel.HangarIds = pista.HangarsIds;
         //     // viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
 
-        //     //ViewData["Hangars"] = new SelectList(_hangarService.GetAll(), "HangarId", "HangarNombre", "nameFilterHan");
+        //     //ViewData["Hangars"] = new SelectList(_hangarService.GetAll(), "HangarId", "HangarNombre", "NameFilterCoc");
         //     return View(viewModel);
         // }
         public IActionResult Edit(int? id)
