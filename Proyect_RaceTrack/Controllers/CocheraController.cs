@@ -17,10 +17,12 @@ namespace Proyect_RaceTrack.Controllers
     public class CocheraController : Controller
     {
         private ICocheraService _cocheraService;
+        private IPistaService _pistaService;
 
-        public CocheraController(ICocheraService cocheraService)
+        public CocheraController(ICocheraService cocheraService, IPistaService pistaService)
         {
             _cocheraService = cocheraService;
+            _pistaService = pistaService;
         }
 
         // GET: Hangar
@@ -64,6 +66,7 @@ namespace Proyect_RaceTrack.Controllers
         {
             // ViewData["Pistas"] = new SelectList(_context.Pista.ToList(),"PistaId","PistaNombre");
             //ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
+            ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
             return View();
         }
 

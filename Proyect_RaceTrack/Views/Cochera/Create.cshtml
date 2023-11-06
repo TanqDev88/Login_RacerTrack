@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    var pistaList = ViewData["Pistas"];
 }
 
 <h1>Create</h1>
@@ -44,6 +45,11 @@
                     <input class="form-check-input" asp-for="CocheraOficinas" /> @Html.DisplayNameFor(model => model.CocheraOficinas)
                 </label>
             </div>
+
+            <select class="form-select" aria-label="Default select example" multiple asp-for="PistaIds" id="Pistas"
+                asp-items="ViewBag.Pistas" placeholder="select members" class="form-control w-50 dropdown">
+            </select>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

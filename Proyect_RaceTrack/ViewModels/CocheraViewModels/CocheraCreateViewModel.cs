@@ -13,6 +13,6 @@ namespace Proyect_RaceTrack.ViewModels.CocheraViewModels
         public CocheraType CocheraSector { get; set; }
         public bool CocheraAptoMantenimiento { get; set; } = true;
         public bool CocheraOficinas { get; set; } = true;
-        //public virtual List<Pista> Pistas { get; set; }
+        public List<int>? PistaIds { get; set; }
     }
 }
