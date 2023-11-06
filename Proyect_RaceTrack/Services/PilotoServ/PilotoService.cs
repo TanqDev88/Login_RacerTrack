@@ -51,7 +51,9 @@ public class PilotoService : IPilotoService
     public Piloto? GetById(int id)
     {
             var piloto = _context.Piloto
+            .Include(p => p.Vehiculo)
                 .FirstOrDefault(m => m.PilotoId == id);
+                
             return piloto;  
     }
 

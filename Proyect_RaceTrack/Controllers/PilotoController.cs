@@ -44,7 +44,8 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var piloto = _pilotoService.GetById(id.Value);
-            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
+                // .Include(p => p.Vehiculo)
+                // .FirstOrDefaultAsync(m => m.PilotoId == id);
             if (piloto == null)
             {
                 return NotFound();
@@ -58,6 +59,7 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PilotoPropietario = piloto.PilotoPropietario;
             //viewModel.Pi = piloto.PilotoEnActividad;
             viewModel.VehiculoId = piloto.VehiculoId;
+            viewModel.Vehiculo = piloto.Vehiculo;
 
             return View(viewModel);
         }
@@ -175,6 +177,7 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PilotoPropietario = piloto.PilotoPropietario;
             //viewModel.Pi = instructor.InstructorEnActividad;
             viewModel.VehiculoId = piloto.VehiculoId;
+            viewModel.Vehiculo = piloto.Vehiculo;
 
             return View(viewModel);
         }
