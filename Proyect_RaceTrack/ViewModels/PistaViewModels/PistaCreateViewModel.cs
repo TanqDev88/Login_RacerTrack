@@ -17,6 +17,6 @@ namespace Proyect_RaceTrack.ViewModels.PistaViewModels
         public PistaType PistaMaterial { get; set; }
         public bool PistaIluminacion { get; set; } = true;
         public bool PistaAprovisionamiento { get; set; } = true;
-        //public virtual List<Cochera> Cocheras { get; set; }
+        public List<int> CocheraIds { get; set; }
     }
 }

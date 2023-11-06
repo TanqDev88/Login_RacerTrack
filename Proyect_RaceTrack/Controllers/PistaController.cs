@@ -61,7 +61,7 @@ namespace Proyect_RaceTrack.Controllers
         // GET: Pista/Create
         public IActionResult Create()
         {
-            //ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
+            ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
             return View();
         }
 
