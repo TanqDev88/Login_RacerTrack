@@ -33,12 +33,12 @@ public class PilotoService : IPilotoService
 
     public List<Piloto> GetAll()
     {
-        var query = from piloto in _context.Piloto select piloto;
+        var query = from piloto in _context.Piloto.Include(i => i.Vehiculo) select piloto;
         return query.ToList();
     }
 
     public List<Piloto> GetAll(string nameFilterIns){
-        var query = from piloto in _context.Piloto select piloto;
+        var query = from piloto in _context.Piloto.Include(i => i.Vehiculo) select piloto;
 
         if (!string.IsNullOrEmpty(nameFilterIns))
         {
