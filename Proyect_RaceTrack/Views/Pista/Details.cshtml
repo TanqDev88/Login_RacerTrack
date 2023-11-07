@@ -3,7 +3,11 @@
 
 @{
     ViewData["Title"] = "Details";
+    var cocheraList = ViewData["Cocheras"];
 }
+
+
+
 
 <h1>Details</h1>
 
@@ -41,7 +45,22 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PistaAprovisionamiento)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cocheras)
+        </dt>
+        @* <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cocheras.CocheraNombre)
+        </dd> *@
     </dl>
+    <div>
+    <ol>
+        @foreach (var item in Model.Cocheras)
+        {
+            <li>Articulo: @item.CocheraNombre</li>                
+        }
+    </ol>
+        
+</div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.PistaId">Edit</a> |

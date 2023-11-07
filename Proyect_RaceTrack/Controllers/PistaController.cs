@@ -54,7 +54,11 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PistaIluminacion = pista.PistaIluminacion;
             viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
             //viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
+            viewModel.Cocheras = pista.Cocheras;
+            //viewModel.CocheraNombre = pista.CocheraNombre; 
 
+            ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
+            ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
             return View(viewModel);
         }
 
@@ -85,6 +89,7 @@ namespace Proyect_RaceTrack.Controllers
                     PistaMaterial = pistaView.PistaMaterial,
                     PistaIluminacion = pistaView.PistaIluminacion,
                     PistaAprovisionamiento = pistaView.PistaAprovisionamiento,
+                    //Cocheras = pistaView.CocheraIds;
                     // Hangars = hangars
                 };
 

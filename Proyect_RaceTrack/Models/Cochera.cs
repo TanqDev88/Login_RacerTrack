@@ -16,5 +16,6 @@ namespace Proyect_RaceTrack.Models
         public bool CocheraAptoMantenimiento { get; set; } = true;
         public bool CocheraOficinas { get; set; } = true;
         public virtual List<Pista> Pistas { get; set; }
+        
     }
 }

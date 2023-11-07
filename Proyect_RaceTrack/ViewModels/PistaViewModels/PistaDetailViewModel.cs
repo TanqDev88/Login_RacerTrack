@@ -20,6 +20,9 @@ public class PistaDetailViewModel{
         public bool PistaIluminacion {get;set;} = true;
         [Display(Name = "Aprovisionamiento")]
         public bool PistaAprovisionamiento {get;set;} = true;
+
+        public int CocheraId {get; set;}
         //        [Display(Name = "Tipo de aeronave")]
-        // public virtual List<Hangar> Hangars {get;set;}
+        public virtual List<Cochera> Cocheras {get;set;}
+        //public string? CocheraNombre { get; set; }
 }

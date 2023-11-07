@@ -25,7 +25,7 @@ namespace Proyect_RaceTrack.Controllers
             _pistaService = pistaService;
         }
 
-        // GET: Hangar
+        // GET: Cochera
         public IActionResult Index(string NameFilterCoc)
         {
             var model = new CocheraIndexViewModel();
@@ -35,7 +35,7 @@ namespace Proyect_RaceTrack.Controllers
 
         }
 
-        // GET: Hangar/Details/5
+        // GET: Cochera/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -61,7 +61,7 @@ namespace Proyect_RaceTrack.Controllers
             return View(viewModel);
         }
 
-        // GET: Hangar/Create
+        // GET: Cochera/Create
         public IActionResult Create()
         {
             // ViewData["Pistas"] = new SelectList(_context.Pista.ToList(),"PistaId","PistaNombre");
@@ -70,7 +70,7 @@ namespace Proyect_RaceTrack.Controllers
             return View();
         }
 
-        // POST: Hangar/Create
+        // POST: Cochera/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -99,7 +99,7 @@ namespace Proyect_RaceTrack.Controllers
             return View(cocheraView);
         }
 
-        // GET: Hangar/Edit/5
+        // GET: Cochera/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -112,10 +112,11 @@ namespace Proyect_RaceTrack.Controllers
             {
                 return NotFound();
             }
+            ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
             return View(cochera);
         }
 
-        // POST: Hangar/Edit/5
+        // POST: Cochera/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -151,7 +152,7 @@ namespace Proyect_RaceTrack.Controllers
             return View(cochera);
         }
 
-        // GET: Hangar/Delete/5
+        // GET: Cochera/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -175,7 +176,7 @@ namespace Proyect_RaceTrack.Controllers
 
         }
 
-        // POST: Hangar/Delete/5
+        // POST: Cochera/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
