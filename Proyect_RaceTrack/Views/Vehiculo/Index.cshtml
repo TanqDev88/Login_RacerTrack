@@ -40,6 +40,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.VehiculoFabricacion)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehiculoCosto)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -63,9 +66,13 @@
                     @Html.DisplayFor(modelItem => item.VehiculoFabricacion)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.VehiculoCosto)
+                </td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.VehiculoId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.VehiculoId">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.VehiculoId">Delete</a>
+                    <a asp-action="UpdatePrice" asp-route-id="@item.VehiculoId">Actualizar precio</a>
                 </td>
             </tr>
         }

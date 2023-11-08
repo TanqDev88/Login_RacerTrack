@@ -40,6 +40,8 @@ namespace Proyect_RaceTrack.Models
         [Required(ErrorMessage = "Debe ingresar el año de fabricacion")]
 
         public DateTime VehiculoFabricacion { get; set; }
+        public int VehiculoCosto { get; set; }
+
         public ICollection<Piloto> PilotoList { get; set; } = new List<Piloto>();
     }
 }

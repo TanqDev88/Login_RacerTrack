@@ -12,7 +12,7 @@ using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
 
 using Proyect_RaceTrack.Services;
-
+using Proyect_RaceTrack.ViewModels;
 using Proyect_RaceTrack.ViewModels.VehiculoViewModels;
 
 namespace Proyect_RaceTrack.Controllers
@@ -186,47 +186,47 @@ namespace Proyect_RaceTrack.Controllers
             return _vehiculoService.GetById(id) != null;
         }
         //FUNCIONALIDAD /
-        // public IActionResult UpdatePrice(int? id)
-        // {
-        //     if (id == null)
-        //     {
-        //         return NotFound();
-        //     }
+        public IActionResult UpdatePrice(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //     var aeronave = _vehiculoService.GetById(id.Value);
-        //     if (aeronave == null)
-        //     {
-        //         return NotFound();
-        //     }
+            var vehiculo = _vehiculoService.GetById(id.Value);
+            if (vehiculo == null)
+            {
+                return NotFound();
+            }
 
-        //     var viewModel = new MenuUpdatePriceViewModel
-        //     {
-        //         AeronaveCosto = vehiculo.AeronaveCosto,
-        //         AeronaveId = vehiculo.AeronaveId,
-        //         AeronaveTipo = vehiculo.AeronaveTipo,
-        //     };
+            var viewModel = new MenuUpdatePriceViewModel
+            {
+                VehiculoCosto = vehiculo.VehiculoCosto,
+                VehiculoId = vehiculo.VehiculoId,
+                VehiculoTipo = vehiculo.VehiculoTipo,
+            };
 
-        //     return View(viewModel);
-        // }
+            return View(viewModel);
+        }
 
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // public IActionResult UpdatePrice(MenuUpdatePriceViewModel model)
-        // {
-        //     var aeronave = _vehiculoService.GetById(model.AeronaveId);
-        //     if (aeronave == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     if (model.Cantidad > 0)
-        //     {
-        //         aeronave.AeronaveCosto = (model.Cantidad * aeronave.AeronaveCosto) + model.Instruccion;
-        //         _aeronaveService.Update(aeronave);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdatePrice(MenuUpdatePriceViewModel model)
+        {
+            var vehiculo = _vehiculoService.GetById(model.VehiculoId);
+            if (vehiculo == null)
+            {
+                return NotFound();
+            }
+            if (model.Cantidad > 0)
+            {
+                vehiculo.VehiculoCosto = (model.Cantidad * vehiculo.VehiculoCosto) + model.Instruccion;
+                _vehiculoService.Update(vehiculo); 
 
-        //     }
+            }
 
-        //     return RedirectToAction("Index");
-        // }
+            return RedirectToAction("Index");
+        }
 
     }
 }
