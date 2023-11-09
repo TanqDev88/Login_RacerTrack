@@ -6,10 +6,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Editar Piloto</h1>
 
-<h4>Piloto</h4>
-<hr />
+@* <hr /> *@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -20,47 +19,58 @@
                 <input asp-for="PilotoNombre" class="form-control" />
                 <span asp-validation-for="PilotoNombre" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="PilotoApellido" class="control-label"></label>
                 <input asp-for="PilotoApellido" class="form-control" />
                 <span asp-validation-for="PilotoApellido" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="PilotoDni" class="control-label"></label>
                 <input asp-for="PilotoDni" class="form-control" />
                 <span asp-validation-for="PilotoDni" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="PilotoNumeroLicencia" class="control-label"></label>
                 <input asp-for="PilotoNumeroLicencia" class="form-control" />
                 <span asp-validation-for="PilotoNumeroLicencia" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="PilotoExpedicion" class="control-label"></label>
                 <input asp-for="PilotoExpedicion" class="form-control" />
                 <span asp-validation-for="PilotoExpedicion" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="PilotoPropietario" /> @Html.DisplayNameFor(model => model.PilotoPropietario)
+                    <input class="form-check-input" asp-for="PilotoPropietario" /> @Html.DisplayNameFor(model =>
+                    model.PilotoPropietario)
                 </label>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="VehiculoId" class="control-label"></label>
                 <select asp-for="VehiculoId" class="form-control" asp-items="ViewBag.VehiculoId"></select>
                 <span asp-validation-for="VehiculoId" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar cambios" class="btn btn-success" />
             </div>
+            <br>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
