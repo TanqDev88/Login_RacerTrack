@@ -2,6 +2,7 @@
 namespace Proyect_RaceTrack.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
+
 public class MenuUpdatePriceViewModel
 {
     public int VehiculoId { get; set; }
