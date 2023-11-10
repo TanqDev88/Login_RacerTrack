@@ -1,4 +1,4 @@
-@model Proyect_RaceTrack.Models.Cochera
+@model Proyect_RaceTrack.Models.Cochera;
 
 @{
     ViewData["Title"] = "Details";
@@ -40,7 +40,18 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CocheraOficinas)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pistas)
+        </dt>
     </dl>
+    <div>
+        <ol>
+            @foreach (var item in Model.Pistas)
+            {
+                <li>@item.PistaNombre</li>
+            }
+        </ol>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.CocheraId">Edit</a> |

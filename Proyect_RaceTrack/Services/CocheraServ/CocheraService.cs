@@ -1,4 +1,5 @@
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.EntityFrameworkCore;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
 namespace Proyect_RaceTrack.Services;
@@ -55,7 +56,10 @@ public class CocheraService : ICocheraService
     public Cochera? GetById(int id)
     {
         var cochera = _context.Cochera
-            .FirstOrDefault(m => m.CocheraId == id);
+                            // .Include(r => r.Pistas)
+                            // .FirstOrDefault(m => m.CocheraId == id);
+                .Include(r => r.Pistas)
+                .FirstOrDefault(m => m.CocheraId == id);
         return cochera;
     }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Proyect_RaceTrack.Models;
 
 namespace Proyect_RaceTrack.ViewModels.CocheraViewModels
 {
@@ -13,6 +14,7 @@ namespace Proyect_RaceTrack.ViewModels.CocheraViewModels
         public CocheraType CocheraSector { get; set; }
         public bool CocheraAptoMantenimiento { get; set; } = true;
         public bool CocheraOficinas { get; set; } = true;
-        //public virtual List<Pista> Pistas { get; set; }
+        public int PistaId {get; set;}
+        public virtual List<Pista>? Pistas { get; set; }
     }
 }

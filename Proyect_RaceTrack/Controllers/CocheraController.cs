@@ -50,15 +50,15 @@ namespace Proyect_RaceTrack.Controllers
                 return NotFound();
             }
 
-            var viewModel = new CocheraDetailViewModel();
-            viewModel.CocheraNombre = cochera.CocheraNombre;
-            viewModel.CocheraNumero = cochera.CocheraNumero;
-            viewModel.CocheraSector = cochera.CocheraSector;
-            viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
-            viewModel.CocheraOficinas = cochera.CocheraOficinas;
+            // var viewModel = new CocheraDetailViewModel();
+            // viewModel.CocheraNombre = cochera.CocheraNombre;
+            // viewModel.CocheraNumero = cochera.CocheraNumero;
+            // viewModel.CocheraSector = cochera.CocheraSector;
+            // viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
+            // viewModel.CocheraOficinas = cochera.CocheraOficinas;
             //viewModel.Pistas = hangar.Pistas;
 
-            return View(viewModel);
+            return View(cochera);
         }
 
         // GET: Cochera/Create
