@@ -1,4 +1,5 @@
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.EntityFrameworkCore;
 using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
 
@@ -48,6 +49,7 @@ public class PistaService : IPistaService
     public Pista? GetById(int id)
     {
             var pista = _context.Pista
+                .Include(r => r.Cocheras)
                 .FirstOrDefault(m => m.PistaId == id);
             return pista;  
     }

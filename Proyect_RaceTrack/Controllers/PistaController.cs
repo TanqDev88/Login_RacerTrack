@@ -46,20 +46,24 @@ namespace Proyect_RaceTrack.Controllers
                 return NotFound();
             }
 
-            var viewModel = new PistaDetailViewModel();
-            viewModel.PistaId = pista.PistaId;
-            viewModel.PistaNombre = pista.PistaNombre;
-            viewModel.PistaCodigo = pista.PistaCodigo;
-            viewModel.PistaMaterial = pista.PistaMaterial;
-            viewModel.PistaIluminacion = pista.PistaIluminacion;
-            viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
-            //viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
-            viewModel.Cocheras = pista.Cocheras;
-            //viewModel.CocheraNombre = pista.CocheraNombre; 
+            return View(pista);
 
-            ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
-            ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
-            return View(viewModel);
+            // CORTAMOS ACA PARA LA PRUEBA
+
+            // var viewModel = new PistaDetailViewModel();
+            // viewModel.PistaId = pista.PistaId;
+            // viewModel.PistaNombre = pista.PistaNombre;
+            // viewModel.PistaCodigo = pista.PistaCodigo;
+            // viewModel.PistaMaterial = pista.PistaMaterial;
+            // viewModel.PistaIluminacion = pista.PistaIluminacion;
+            // viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
+            // //viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
+            // viewModel.Cocheras = pista.Cocheras;
+            // //viewModel.CocheraNombre = pista.CocheraNombre; 
+
+            // ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
+            // ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
+            // return View(viewModel);
         }
 
         // GET: Pista/Create

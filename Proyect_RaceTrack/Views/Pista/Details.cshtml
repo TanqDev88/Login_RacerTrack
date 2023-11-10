@@ -1,5 +1,6 @@
-@using Proyect_RaceTrack.ViewModels.PistaViewModels;
-@model PistaDetailViewModel;
+@* @using Proyect_RaceTrack.ViewModels.PistaViewModels;
+@model PistaDetailViewModel; *@
+@model Proyect_RaceTrack.Models.Pista;
 
 @{
     ViewData["Title"] = "Details";
@@ -53,14 +54,13 @@
         </dd> *@
     </dl>
     <div>
-    <ol>
-        @foreach (var item in Model.Cocheras)
-        {
-            <li>Articulo: @item.CocheraNombre</li>                
-        }
-    </ol>
-        
-</div>
+        <ol>
+            @foreach (var item in Model.Cocheras)
+            {
+                <li>@item.CocheraNombre</li>
+            }
+        </ol>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.PistaId">Edit</a> |
