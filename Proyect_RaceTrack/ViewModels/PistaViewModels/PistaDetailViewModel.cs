@@ -23,6 +23,6 @@ public class PistaDetailViewModel{
 
         public int CocheraId {get; set;}
         //        [Display(Name = "Tipo de aeronave")]
-        public virtual List<Cochera>? Cocheras {get;set;}
+        public List<Cochera>? Cocheras {get;set;}
         //public string? CocheraNombre { get; set; }
 }
