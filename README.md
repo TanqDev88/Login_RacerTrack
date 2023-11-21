@@ -1,7 +1,7 @@
-# Proyecto Aeroclub rio de la plata
+# Proyecto Racer Track
 ***
 ![Image text](https://static.wixstatic.com/media/279b70_07d1f5ba938e4f0fa2fa745371a35533.jpg)
-En este repositorio se encuentra el proyecto correspondiente al primer parcial, el mismo consiste en un sistema de gestion de instructores de vuelo.
+En este repositorio se encuentra el proyecto correspondiente al segundo parcial, el mismo consiste en un sistema de gestion de un autodoromo que cuenta con la funcionalidad de pista libre.
 
 ## Contenido
 1. [Informacion general](#general-info)
@@ -11,13 +11,10 @@ En este repositorio se encuentra el proyecto correspondiente al primer parcial, 
 
 ## Informacion General 
 ***
-La aplicación perteneciente al aeroclub del río de la plata tiene como objetivo la gestión de la nomina de instructores de vuelo desde sus datos personales hasta la asignación de aeronaves a los mismos.  El proyecto se encuentra aun aun en proceso de desarrollo llegando hasta la conexión del mismo su propia base de datos. 
+La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la gestión de pistas y  nomina de pilotos/propietarios de vehiculos para su uso dentro del autodromo (desde sus datos personales hasta la asignación de vehiculos, pistas y cocheras.  El proyecto se encuentra aun aun en proceso de desarrollo pero ya cuenta con los siguientes ABM donde se puede crear, editar, observar detalle y eliminar registros, una funcionalidad de autenticacion y registro de usuarios llegando hasta el desarrollo de una funcionalidad de calculo de costos para el uso de la pista libre por horas. 
 ### Menu principal
 
-![Image text](https://github.com/jorgedan88/ProyectoPrimerParcial/blob/main/Resources/Index.jpg);
-
-### Pantalla agregar instructor
-![Image text](https://github.com/jorgedan88/ProyectoPrimerParcial/blob/main/Resources/Crear.jpg)
+### Pantalla agregar piloto:
 
 
 ## Tecnologias
@@ -32,7 +29,7 @@ Las tecnologias aplicadas en el proyecto son las siguientes:
 ***
 Clonar el proyecto desde la siguiente URL de Github. 
 ```
-$ git clone https://github.com/jorgedan88/ProyectoPrimerParcial.git
+$ git clone https://github.com/jorgedan88/herramientas-parcial1-OliveraJorgeDaniel.git
 
 ```
 
