@@ -1,54 +1,52 @@
-# Proyecto Racer Track
-***
-![Image text](https://static.wixstatic.com/media/279b70_07d1f5ba938e4f0fa2fa745371a35533.jpg)
-En este repositorio se encuentra el proyecto correspondiente al segundo parcial, el mismo consiste en un sistema de gestion de un autodoromo que cuenta con la funcionalidad de pista libre.
-
-## Contenido
-1. [Informacion general](#general-info)
-2. [Tecnologias](#technologies)
-3. [Instalacion](#installation)
+# Proyect RacerTrack
+>  In this repository there is the project corresponding to a management system for a car park that has free lane functionality.
+---
 
 
-## Informacion General 
-***
-La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la gestión de pistas y  nomina de pilotos/propietarios de vehiculos para su uso dentro del autodromo (desde sus datos personales hasta la asignación de vehiculos, pistas y cocheras.  El proyecto se encuentra aun aun en proceso de desarrollo pero ya cuenta con los siguientes ABM donde se puede crear, editar, observar detalle y eliminar registros, una funcionalidad de autenticacion y registro de usuarios llegando hasta el desarrollo de una funcionalidad de calculo de costos para el uso de la pista libre por horas. 
-### Menu principal
+![Image text](https://i0.wp.com/www.revistaracingcar.com/wp-content/uploads/2015/10/TC-2000-FOTO-PRESENTACION.jpg)
 
-### Pantalla agregar piloto:
+## Content
+* [General information](#introduccion)
+* [Technologies](#technologies)
+* [Project installation](#installation)
+---
 
 
-## Tecnologias
-***
-Las tecnologias aplicadas en el proyecto son las siguientes:
-* [Dotnet](https://dotnet.microsoft.com/en-us/download): Version 7.0.203 
-* [Dotnet SDK](https://example.com): Version 7.0
-.203
-* [Entity framework core](https://learn.microsoft.com/en-us/ef/core/): Version 8.0
+<a name="introduccion"></a> 
 
-## Instalacion del proyecto
-***
-Clonar el proyecto desde la siguiente URL de Github. 
+
+## Project status 🚧 
+<details>
+    <summary>Click Here for Detail ↩️</summary>
+    <br>
+   <p align="justify">The project is finished as it implements CSS to improve the visual aspects of the application.🔨 </p>
+   </details>
+   <hr>
+
+
+ <a name="preguntas"></a> 
+<a name="technologies"></a> 
+   ## Used technology  💻 
+   
+<details>
+    <summary>Click Here for Detail ↩️</summary>
+    <br>
+   <p>Used technology:</p>
+<ul>
+  <li>CSS: <a href="https://lenguajecss.com/css/">Link to the official language documentation</a></li>
+  <li>HTML5: <a href="https://lenguajehtml.com/html/">Link to the official language documentation</a></li>
+  <li>VS Code: <a href="https://code.visualstudio.com/">Link to the official page</a></li>
+</ul>
+
+   </details>
+   <hr>
+
+<a name="installation"></a>    
+## Project installation
+1 - Clone the project from the following Github URL. 
 ```
-$ git clone https://github.com/jorgedan88/herramientas-parcial1-OliveraJorgeDaniel.git
-
-```
-
-Instalar las siguientes herramientas de manera global:
-```
-dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet tool install --global dotnet-ef
-
-```
-Instalar las siguientes herramientas de manera local:
-```
-dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet add package Microsoft.EntityFrameworkCore.SQLite
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-dotnet add package Microsoft.EntityFrameworkCore.Tools
-
-```
-Desde la carpeta donde se clono el proyecto ejecutar el siguiente comando para ejecutarlo. 
-```
-dotnet run
+$ git clone [git@github.com:Tanqueta88/PianoApp.git](https://github.com/Tanqueta88/PianoApp.git)
 
 ```
+
+2 - Open the project in your preferred IDE. 
