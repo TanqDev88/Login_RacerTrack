@@ -70,3 +70,13 @@ dotnet add package Microsoft.EntityFrameworkCore.Tools
 dotnet run
 
 ```
+
+   ## Free-runway calculation  📖🖍️
+
+
+<details>
+    <summary>Click Here for Detail ↩️</summary>
+    <br>
+   <p>Functionality:</p>
+<ul>
+  <li>The system has a working calculator although open to future improvements whose operation is as follows:<br>
