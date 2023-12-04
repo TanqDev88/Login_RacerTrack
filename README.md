@@ -95,3 +95,11 @@ STEPS<br>
 5- If you want to make another calculation, press the "Clear" button <br>
 6- If you want to return to the main menu, press the "Back" button</a></li><br>
    </ul>
+
+Example case:<br>
+to. A fuel cost of 20 is entered with a consumption per hour of 1<br>
+b. Select the Single-seat category which adds 3000 to the calculation<br>
+c. The assistance of an instructor is requested which adds 5000 to the calculation<br>
+d. The cost of the free track hour must be 8020.00<br>
+    </details>
+    <hr>
