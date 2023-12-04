@@ -80,3 +80,18 @@ dotnet run
    <p>Functionality:</p>
 <ul>
   <li>The system has a working calculator although open to future improvements whose operation is as follows:<br>
+
+STEPS<br>
+1- Log in to the Racer Track system<br>
+2- From the main menu enter the calculator tab.<br>
+3- On the calculator screen, complete the following fields:<br>
+
+   - Enter the value in Argentine pesos of the liter of fuel.<br>
+   - Enter the consumption in liters per hour of the vehicle (a table with these values will be implemented soon for this functionality)<br>
+   - Select the competition category of the vehicle to use among the following: . Single-seater (Adds $3000 to the hourly value). GT (Adds $4000 to the hourly value) . Track Tourism (Adds $4500 to the hourly value). Stop Car (Adds $5500 to hourly value) . Rally (Add $7000 to hourly value)<br>
+   - In the case of hiring an instructor, activate the check (if activated, it adds $5000 to the hourly value)<br>
+  
+4- To perform the calculation press the calculate button.<br>
+5- If you want to make another calculation, press the "Clear" button <br>
+6- If you want to return to the main menu, press the "Back" button</a></li><br>
+   </ul>
