@@ -37,7 +37,7 @@
             @Html.DisplayNameFor(model => model.PilotoExpedicion)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PilotoExpedicion)
+            @Model.PilotoExpedicion.ToString("dd/MM/yyyy")
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PilotoPropietario)
@@ -58,6 +58,6 @@
         <input type="submit" value="Eliminar Piloto" class="btn btn-danger" />
         <br>
         <br>
-        <a asp-action="Index">Volver</a>
+        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
     </form>
 </div>
