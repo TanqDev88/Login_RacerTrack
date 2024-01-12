@@ -5,55 +5,35 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalles del Piloto</h1>
+<div class="container mt-4">
+    <h1>Detalles del Piloto</h1>
 
-<div>
     <hr />
+
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PilotoNombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PilotoNombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PilotoApellido)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PilotoApellido)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PilotoDni)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PilotoDni)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PilotoNumeroLicencia)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PilotoNumeroLicencia)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PilotoExpedicion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PilotoExpedicion)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PilotoPropietario)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PilotoPropietario)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vehiculo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vehiculo.VehiculoTipo)
-        </dd>
+        <dt class="col-sm-2">Nombre</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.PilotoNombre)</dd>
+
+        <dt class="col-sm-2">Apellido</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.PilotoApellido)</dd>
+
+        <dt class="col-sm-2">DNI</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.PilotoDni)</dd>
+
+        <dt class="col-sm-2">Número de Licencia</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.PilotoNumeroLicencia)</dd>
+
+        <dt class="col-sm-2">Fecha de Expedición</dt>
+        <dd class="col-sm-10">@Model.PilotoExpedicion.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-2">Propietario</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.PilotoPropietario)</dd>
+
+        <dt class="col-sm-2">Tipo carroceria</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Vehiculo.VehiculoTipo)</dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Index">Volver</a>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+    </div>
 </div>
