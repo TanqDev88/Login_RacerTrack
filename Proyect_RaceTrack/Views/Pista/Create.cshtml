@@ -1,14 +1,13 @@
 @using Proyect_RaceTrack.ViewModels.PistaViewModels;
-@model PistaCreateViewModel;
+@model PistaCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
     var cocheraList = ViewData["Cocheras"];
 }
 
-<h1>Create</h1>
+<h1>Crear Pista</h1>
 
-<h4>Pista</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,11 +18,13 @@
                 <input asp-for="PistaNombre" class="form-control" />
                 <span asp-validation-for="PistaNombre" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="PistaCodigo" class="control-label"></label>
                 <input asp-for="PistaCodigo" class="form-control" />
                 <span asp-validation-for="PistaCodigo" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="PistaMaterial" class="control-label"></label>
                 <select asp-for="PistaMaterial" class="form-control">
@@ -33,34 +34,42 @@
                     <option value="3">Hormigon</option>
                 </select>
             </div>
+            <br>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="PistaIluminacion" /> @Html.DisplayNameFor(model => model.PistaIluminacion)
+                    <input class="form-check-input" asp-for="PistaIluminacion" /> @Html.DisplayNameFor(model =>
+                    model.PistaIluminacion)
                 </label>
             </div>
+            <br>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="PistaAprovisionamiento" /> @Html.DisplayNameFor(model => model.PistaAprovisionamiento)
+                    <input class="form-check-input" asp-for="PistaAprovisionamiento" /> @Html.DisplayNameFor(model =>
+                    model.PistaAprovisionamiento)
                 </label>
             </div>
 
             <select class="form-select" aria-label="Default select example" multiple asp-for="CocheraIds" id="Cocheras"
                 asp-items="ViewBag.Cocheras" placeholder="select members" class="form-control w-50 dropdown">
             </select>
+            <br>
 
 
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear Pista" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
+<br>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
