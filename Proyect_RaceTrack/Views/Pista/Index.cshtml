@@ -5,67 +5,52 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h1>Pistas</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <p>
+        <a asp-action="Create" class="btn btn-success">+ Pista</a>
+    </p>
 
-<div class="row">
-    <form method="get" asp-action="Index" asp-controller="Pista">
-        <div class="col-6 form-group">
-            <input class="form-control" asp-for="NameFilterPista" />
-        </div>
-        <br>
-        <button class="btn btn-info" type="submit">Buscar</button>
-    </form>
+    <div class="row">
+        <form method="get" asp-action="Index" asp-controller="Pista" class="col-6">
+            <div class="form-group">
+                <input class="form-control" asp-for="NameFilterPista" placeholder="Buscar por Nombre o Nomenclatura" />
+            </div>
+            <button class="btn btn-info" type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.PistaNombre)</th>
+                <th>@Html.DisplayNameFor(model => model.PistaCodigo)</th>
+                <th>@Html.DisplayNameFor(model => model.PistaMaterial)</th>
+                <th>@Html.DisplayNameFor(model => model.PistaIluminacion)</th>
+                <th>@Html.DisplayNameFor(model => model.PistaAprovisionamiento)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.pistas)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.PistaNombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PistaCodigo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PistaMaterial)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PistaIluminacion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PistaAprovisionamiento)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PistaId" class="btn btn-warning">Modificar</a>
+                        <a asp-action="Details" asp-route-id="@item.PistaId" class="btn btn-primary">Detalle</a>
+                        <a asp-action="Delete" asp-route-id="@item.PistaId" class="btn btn-danger"
+                            onclick="return confirm('¿Está seguro que quiere eliminar esta pista?')">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PistaNombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PistaCodigo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PistaMaterial)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PistaIluminacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PistaAprovisionamiento)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.pistas) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PistaNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PistaCodigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PistaMaterial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PistaIluminacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PistaAprovisionamiento)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PistaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PistaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PistaId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
