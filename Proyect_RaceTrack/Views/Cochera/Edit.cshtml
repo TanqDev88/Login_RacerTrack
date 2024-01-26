@@ -1,14 +1,15 @@
-@* @model Proyect_RaceTrack.ViewModels.CocheraViewModels.CocheraEditViewModel; *@
-@model Proyect_RaceTrack.Models.Cochera
+@* model Proyect_RaceTrack.ViewModels.CocheraViewModels.CocheraEditViewModel; *@
+@using Proyect_RaceTrack.ViewModels.CocheraViewModels;
+@model CocheraEditViewModel;
+@* @model Proyect_RaceTrack.Models.Cochera *@
 
 @{
     ViewData["Title"] = "Edit";
     var pistaList = ViewData["Pistas"];
 }
 
-<h1>Edit</h1>
+<h1>Editar Cochera</h1>
 
-<h4>Cochera</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -20,11 +21,13 @@
                 <input asp-for="CocheraNombre" class="form-control" />
                 <span asp-validation-for="CocheraNombre" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="CocheraNumero" class="control-label"></label>
                 <input asp-for="CocheraNumero" class="form-control" />
                 <span asp-validation-for="CocheraNumero" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="CocheraSector" class="control-label"></label>
                 <select asp-for="CocheraSector" class="form-control">
@@ -34,25 +37,33 @@
                     <option value="3">Oeste</option>
                 </select>
             </div>
+            <br>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="CocheraAptoMantenimiento" /> @Html.DisplayNameFor(model => model.CocheraAptoMantenimiento)
                 </label>
             </div>
+            <br>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="CocheraOficinas" /> @Html.DisplayNameFor(model => model.CocheraOficinas)
                 </label>
             </div>
+            <br>
+            <select class="form-select" aria-label="Default select example" multiple asp-for="PistaIds" id="Pistas"
+                asp-items="ViewBag.Pistas" placeholder="select members" class="form-control w-50 dropdown">
+            </select>
+            <br>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar cambios" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
+<br>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
 </div>
 
 @section Scripts {
