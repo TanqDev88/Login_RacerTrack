@@ -5,68 +5,52 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h1>Cocheras</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <p>
+        <a asp-action="Create" class="btn btn-success">+ Cochera</a>
+    </p>
 
-<div class="row">
-    <form method="get" asp-action="Index" asp-controller="Cochera">
-        <div class="col-6 form-group">
-            <input class="form-control" asp-for="NameFilterCoc" />
-        </div>
-        <br>
-        <button class="btn btn-info" type="submit">Buscar</button>
-    </form>
-</div>
+    <div class="row">
+        <form method="get" asp-action="Index" asp-controller="Cochera" class="col-6">
+            <div class="form-group">
+                <input class="form-control" asp-for="NameFilterCoc" placeholder="Buscar por Nombre o Numero" />
+            </div>
+            <button class="btn btn-info" type="submit">Buscar</button>
+        </form>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CocheraNombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CocheraNumero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CocheraSector)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CocheraAptoMantenimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CocheraOficinas)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.cocheras)
-        {
+    <br />
+
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CocheraNombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CocheraNumero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CocheraSector)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CocheraAptoMantenimiento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CocheraOficinas)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CocheraId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.CocheraId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CocheraId">Delete</a>
-                </td>
+                <th>@Html.DisplayNameFor(model => model.CocheraNombre)</th>
+                <th>@Html.DisplayNameFor(model => model.CocheraNumero)</th>
+                <th>@Html.DisplayNameFor(model => model.CocheraSector)</th>
+                <th>@Html.DisplayNameFor(model => model.CocheraAptoMantenimiento)</th>
+                <th>@Html.DisplayNameFor(model => model.CocheraOficinas)</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.cocheras)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.CocheraNombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CocheraNumero)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CocheraSector)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CocheraAptoMantenimiento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CocheraOficinas)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CocheraId" class="btn btn-warning">Modificar</a>
+                        <a asp-action="Details" asp-route-id="@item.CocheraId" class="btn btn-primary">Detalle</a>
+                        <a asp-action="Delete" asp-route-id="@item.CocheraId" class="btn btn-danger"
+                            onclick="return confirm('¿Está seguro que quiere eliminar esta cochera?')">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
