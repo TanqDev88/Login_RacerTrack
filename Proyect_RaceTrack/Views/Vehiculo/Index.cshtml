@@ -1,4 +1,3 @@
-@* @model IEnumerable<Proyect_RaceTrack.Models.Vehiculo> *@
 @using Proyect_RaceTrack.ViewModels.VehiculoViewModels;
 @model VehiculoIndexViewModel;
 
@@ -6,76 +5,53 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Vehiculos</h1>
+<div class="container mt-4">
+    <h1>Vehículos</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-success">+ Vehiculo</a>
-</p>
+    <p>
+        <a asp-action="Create" class="btn btn-success">+ Vehículo</a>
+    </p>
 
-<div class="row">
-    <form method="get" asp-action="Index" asp-controller="Vehiculo">
-        <div class="col-6 form-group">
-            <input class="form-control" asp-for="NameFilterVeh" />
-        </div>
-        <br>
-        <button class="btn btn-info" type="submit">Buscar</button>
-    </form>
-</div>
+    <div class="row">
+        <form method="get" asp-action="Index" asp-controller="Vehiculo" class="col-6">
+            <div class="form-group">
+                <input class="form-control" asp-for="NameFilterVeh" placeholder="Buscar por Tipo de carroceria o Matricula" />
+            </div>
+            <button class="btn btn-info" type="submit">Buscar</button>
+        </form>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.VehiculoNombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehiculoApellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehiculoTipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehiculoMatricula)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehiculoFabricacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehiculoCosto)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.vehiculos)
-        {
+    <br />
+
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehiculoNombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehiculoApellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehiculoTipo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehiculoMatricula)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehiculoFabricacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehiculoCosto)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.VehiculoId" class="btn btn-warning">Modificar</a>
-                    <a asp-action="Details" asp-route-id="@item.VehiculoId" class="btn btn-primary">Detalle</a>
-                    <a asp-action="Delete" asp-route-id="@item.VehiculoId" class="btn btn-danger"
-                        onclick="return confirm('¿Esta seguro que quiere eliminar a este vehiculo?')">Eliminar</a>
-                    <a asp-action="UpdatePrice" asp-route-id="@item.VehiculoId">Actualizar precio</a>
-                </td>
+                <th>@Html.DisplayNameFor(model => model.VehiculoNombre)</th>
+                <th>@Html.DisplayNameFor(model => model.VehiculoApellido)</th>
+                <th>@Html.DisplayNameFor(model => model.VehiculoTipo)</th>
+                <th>@Html.DisplayNameFor(model => model.VehiculoMatricula)</th>
+                <th>@Html.DisplayNameFor(model => model.VehiculoFabricacion)</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.vehiculos)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.VehiculoNombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.VehiculoApellido)</td>
+                    <td>@Html.DisplayFor(modelItem => item.VehiculoTipo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.VehiculoMatricula)</td>
+                    <td>@Html.DisplayFor(modelItem => item.VehiculoFabricacion.Year)</td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.VehiculoId" class="btn btn-warning">Modificar</a>
+                        <a asp-action="Details" asp-route-id="@item.VehiculoId" class="btn btn-primary">Detalle</a>
+                        <a asp-action="Delete" asp-route-id="@item.VehiculoId" class="btn btn-danger"
+                            onclick="return confirm('¿Está seguro que quiere eliminar a este vehículo?')">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
