@@ -5,44 +5,29 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalles del vehiculo</h1>
+<div class="container mt-4">
+    <h1>Detalles del Vehículo</h1>
 
-<div>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VehiculoNombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VehiculoNombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VehiculoApellido)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VehiculoApellido)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VehiculoTipo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VehiculoTipo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VehiculoMatricula)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VehiculoMatricula)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VehiculoFabricacion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VehiculoFabricacion)
-        </dd>
-    </dl>
-</div>
 
-<div>
-    <a asp-action="Index">Volver</a>
+    <dl class="row">
+        <dt class="col-sm-2">Nombre</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.VehiculoNombre)</dd>
+
+        <dt class="col-sm-2">Apellido</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.VehiculoApellido)</dd>
+
+        <dt class="col-sm-2">Tipo de caroceria</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.VehiculoTipo)</dd>
+
+        <dt class="col-sm-2">Matrícula</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.VehiculoMatricula)</dd>
+
+        <dt class="col-sm-2">Año de Fabricación</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.VehiculoFabricacion.Year)</dd>
+    </dl>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+    </div>
 </div>
