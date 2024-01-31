@@ -1,0 +1,125 @@
+@model IEnumerable<Proyect_RaceTrack.Models.Calculadora>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Calculadora de pista libre </h1>
+
+<hr />
+
+<div class="mb-3">
+
+    <link rel="stylesheet" href="/Proyect_RaceTrack/wwwroot/js/Logica.js">
+    <div class="col-md-6">
+        <p>
+            <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+                aria-expanded="false" aria-controls="collapseWidthExample">
+                Como usar la calculadora?
+            </button>
+        </p>
+        <div class="col-md-" style="min-height: 120px;">
+            <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                <div class="card card-body" style="width: 900px;">
+                    Para calcular el costo de la hora de uso de pista libre ingrese el valor del litro de combustible,
+                    el consumo del vehículo, la categoría de competición y por último si la hora de uso incluye el
+                    acompañamiento de un instructor, para mostrar el valor hora presione el botón calcular.
+                </div>
+            </div>
+            <br>
+            <hr />
+
+
+            <label for="txtCosto">Costo combustible (Lts/$):</label>
+            <input type="number" id="txtCosto" min="0.50" value="0.50">
+            <small class="form-text text-muted">Ingrese un valor mayor a 0.5.</small>
+            <br>
+            <br>
+            <label for="txtCantidad">Consumo (Lts/H):</label>
+            <input type="number" id="txtCantidad" min="1" value="1"
+                onmousedown="if(this.hasAttribute('readonly')) { this.removeAttribute('readonly'); }">
+            <small class="form-text text-muted">Utilice las flechas para ajustar el valor.</small>
+            <br>
+            <br>
+            <label>Categoria de vehiculo:</label>
+            <br>
+            <label><input type="radio" name="opcionOperacion" value="opcion1"> Monoplaza</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion2"> GT</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion3"> Stop Car</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion4"> Turismo Pista</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion5"> Rally</label>
+            <br>
+            <br>
+            <label for="chkSumar50000"><input type="checkbox" id="chkSumar50000"> Necesita instructor?</label>
+            <br>
+            <br>
+            <button class="btn btn-primary" type="button" id="btnCalcular">Calcular</button>
+            <hr />
+            <label for="txtResultado">El valor hora para la Categoria seleccionada es:</label>
+            <input type="text" id="txtResultado" readonly>
+
+            <button type="button" id="btnLimpiar" class="btn btn-outline-primary">Limpiar</button>
+
+
+            <script>
+                @* Con este bloque se arma la lógica de la calculadora *@
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const calculadoraForm = document.getElementById('calculadoraForm');
+                        const txtCosto = document.getElementById('txtCosto');
+                        const txtCantidad = document.getElementById('txtCantidad');
+                        const btnCalcular = document.getElementById('btnCalcular');
+                        const txtResultado = document.getElementById('txtResultado');
+                        const chkSumar50000 = document.getElementById('chkSumar50000');
+                        const btnLimpiar = document.getElementById('btnLimpiar');
+
+                        btnCalcular.addEventListener('click', function () {
+                            const costo = parseFloat(txtCosto.value);
+                            const cantidad = parseInt(txtCantidad.value);
+                            const opcionOperacion = document.querySelector('input[name="opcionOperacion"]:checked');
+
+                            if (costo === 0) {
+                                alert('El costo del combustible no puede ser 0. Por favor, ingrese un valor mayor a 0.');
+                                return;
+                            }
+
+                            if (!isNaN(costo) && !isNaN(cantidad) && opcionOperacion) {
+                                const operacionValue = opcionOperacion.value;
+
+                                let resultado = costo * cantidad;
+
+                @* Este bloque ejecuta la suma al valor  según la categoria seleccionada *@
+                        if (operacionValue === 'opcion1') {
+                                    resultado += 3000;
+                                } else if (operacionValue === 'opcion2') {
+                                    resultado += 4000; // Suma 4000
+                                } else if (operacionValue === 'opcion3') {
+                                    resultado += 4500; // Suma 4500
+                                } else if (operacionValue === 'opcion4') {
+                                    resultado += 5500; // Suma 5500
+                                } else if (operacionValue === 'opcion5') {
+                                    resultado += 7000; // Suma 7000
+                                }
+
+
+                @* Este bloque de codigo suma 5000 si el checkbox está marcado (necesita instructor)*@
+                        if (chkSumar50000.checked) {
+                                    resultado += 5000;
+                                }
+
+                                txtResultado.value = resultado.toFixed(2);
+                            } else {
+                                alert('Ingrese valores numéricos válidos y seleccione la categoria de vehiculo.');
+                            }
+                        });
+
+                @* Este bloque de codigo es para el boton que limpia todos los campos del formulario. *@
+                            btnLimpiar.addEventListener('click', function () {
+                                txtCosto.value = '';
+                                txtCantidad.value = '';
+                                document.querySelector('input[name="opcionOperacion"]:checked').checked = false;
+                                chkSumar50000.checked = false;
+                                txtResultado.value = '';
+                            });
+                    });
+            </script>
+        </div>
