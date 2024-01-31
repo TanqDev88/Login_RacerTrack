@@ -1,0 +1,48 @@
+@using Microsoft.AspNetCore.Identity;
+@using Proyect_RaceTrack.ViewModels;
+@model RoleCreateViewModel;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="mt-4">Crear Rol</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <br>
+                <label asp-for="RoleName" class="control-label">Nombre del Rol:</label>
+                <br><br>
+                <input asp-for="RoleName" class="form-control" required
+                    data-val-required="Ingrese el nombre del rol a crear" />
+                    
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+                <div class="invalid-feedback">Por favor, ingrese un nombre para el rol.</div>
+            </div>
+            <br><br><br>
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Crear Rol</button>
+            </div>
+            <br>
+        </form>
+
+        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+    </div>
+    <div class="col-md-6">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Guerra_y_Traverso_1990.jpg"
+            alt="Miguel Ángel Guerra" class="img-fluid" />
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
