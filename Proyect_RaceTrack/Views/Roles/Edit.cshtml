@@ -1,0 +1,32 @@
+@model Proyect_RaceTrack.ViewModels.RoleEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="mt-4">Editar Rol</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <br>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIqnq9vihos9VvzBiSf4tF39i1b7rdRZGcBg&usqp=CAU"
+            alt="Automovilismo" class="img-fluid" />
+    </div>
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="RoleId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoleName" class="control-label">Nombre del Rol</label>
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+            </div>
+        </form>
+        <br>
+        <a asp-action="Index" class=" btn btn-secondary">Volver a la Lista</a>
+    </div>
+</div>
