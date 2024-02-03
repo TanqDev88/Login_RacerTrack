@@ -1,0 +1,46 @@
+@using Microsoft.AspNetCore.Identity
+@model List<IdentityUser>
+
+@inject UserManager<IdentityUser> _userManager
+
+<h1>Usuarios activos</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>
+                                @{
+                                    var roles = await _userManager.GetRolesAsync(user);
+                                    <text>@string.Join(", ", roles)</text>
+                                }
+                            </td>
+                            <td>
+                                <form asp-action="Edit" asp-route-id="@user.Id" method="get">
+                                    <button type="submit" class="btn btn-warning">Reasignar Rol</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
+            <br>
+<br>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdDkzyXM-sxFDuNzzsQAMefGYZjhgZ6NOKPg&usqp=CAU" alt="Automovilismo" class="img-fluid" />
+        </div>
+    </div>
+</div>
