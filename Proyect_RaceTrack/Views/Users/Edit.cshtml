@@ -1,0 +1,52 @@
+@using Microsoft.AspNetCore.Identity
+@using Proyect_RaceTrack.ViewModels
+@model UserEditViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="mt-4">Reasignar Rol</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <br>
+        <img src="https://diputadosbsas.com.ar/wp-content/uploads/2023/06/balcarce-kicillof-autodromo-fangio.jpg"
+            alt="Automovilismo" class="img-fluid" />
+    </div>
+    <div class="col-md-6">
+        <form asp-action="Edit" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label">Usuario</label>
+                <input asp-for="UserName" class="form-control" readonly />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label asp-for="Role" class="control-label">Rol asignado</label>
+                <select asp-for="Role" asp-items="Model.Roles" class="form-control">
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <input type="submit" value="Reasignar" class="btn btn-success">
+            </div>
+            <br>
+        </form>
+
+        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
