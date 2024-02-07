@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Proyect_RaceTrack.Models;
-//using herramientas_parcial1_OliveraJorgeDaniel.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
@@ -40,7 +34,7 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
         [Display(Name = "Es propietario?")]
         public bool PilotoPropietario { get; set; } = true;
 
-        [Display(Name = "Vehiculo asignado")]
+        [Display(Name = "Tipo de carrocería")]
         public int VehiculoId { get; set; }
     }
 }
