@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Proyect_RaceTrack.Models;
 using System.ComponentModel.DataAnnotations;
 
-//namespace Proyect_RaceTrack.ViewModels.PistaViewModels{
 namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 {
     public class PilotoIndexViewModel
@@ -37,13 +36,15 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 
         [Display(Name = "Fecha de vencimiento")]
         [Required(ErrorMessage = "Debe ingresar la fecha de vencimiento")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime PilotoExpedicion { get; set; }
 
         [Display(Name = "Es propietario?")]
         public bool PilotoPropietario { get; set; } = true;
 
-        [Display(Name = "Vehiculo asignado")]
+        [Display(Name = "Tipo de carrocería")]
         public int VehiculoId { get; set; }
+        public virtual Vehiculo? Vehiculo { get; set; }
         public List<Piloto> pilotos { get; set; } = new List<Piloto>();
     }
 }
