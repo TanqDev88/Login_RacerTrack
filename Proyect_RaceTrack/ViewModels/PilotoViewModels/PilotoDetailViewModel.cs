@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Proyect_RaceTrack.Models;
 using System.ComponentModel.DataAnnotations;
 
@@ -42,7 +38,7 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
         [Display(Name = "Es propietario?")]
         public bool PilotoPropietario { get; set; } = true;
 
-        [Display(Name = "Vehiculo asignado")]
+        [Display(Name = "Tipo de carrocería")]
         public int VehiculoId { get; set; }
         public virtual Vehiculo? Vehiculo { get; set; }
     }
