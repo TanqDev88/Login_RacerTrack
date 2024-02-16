@@ -29,8 +29,3 @@ namespace Proyect_RaceTrack.ViewModels.CocheraViewModels
         public List<int>? PistaIds { get; set; }
     }
 }
-        public bool CocheraAptoMantenimiento { get; set; } = true;
-        public bool CocheraOficinas { get; set; } = true;
-        public List<int>? PistaIds { get; set; }
-    }
-}
