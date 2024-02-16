@@ -1,10 +1,15 @@
 using System.ComponentModel.DataAnnotations;
+using Proyect_RaceTrack.Models;
 using Proyect_RaceTrack.Utils;
 
 namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
 {
-    public class VehiculoCreateViewModel
+    public class VehiculoDeleteViewModel
     {
+        public int VehiculoId { get; set; }
+        public List<Vehiculo> vehiculos { get; set; } = new List<Vehiculo>();
+
+        public String? NameFilter { get; set; }
 
         [Display(Name = "Nombre Propietario")]
         [Required(ErrorMessage = "Debe ingresar el nombre del propietario")]
@@ -18,8 +23,10 @@ namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
         [MaxLength(15)]
         public string? VehiculoApellido { get; set; }
 
-        [Display(Name = "Tipo de carroceria")]
+        [Display(Name = "Tipo de Carroceria")]
         [Required(ErrorMessage = "Debe ingresar el tipo de vehiculo")]
+        [MinLength(3, ErrorMessage = "El nombre ingresado debe poseer mas de tres letras")]
+        [MaxLength(15)]
         public VehiculoType VehiculoTipo { get; set; }
 
         [Display(Name = "Matricula")]
@@ -32,8 +39,6 @@ namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
         [Required(ErrorMessage = "Debe ingresar el año de fabricacion")]
 
         public DateTime VehiculoFabricacion { get; set; }
-
-        public int VehiculoCosto { get; set; }
-
+        public ICollection<Piloto> PilotoList { get; set; } = new List<Piloto>();
     }
 }
