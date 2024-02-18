@@ -35,13 +35,17 @@ public class PistaService : IPistaService
         var query = from pista in _context.Pista select pista;
         return query.ToList();
     }
-//OJO QUE ESTO ESTA AGREGADO DE PRUEBA
+
     public List<Pista> GetAll(string nameFilterPista){
     var query = from pista in _context.Pista select pista;
 
         if (!string.IsNullOrEmpty(nameFilterPista))
         {
-                query = query.Where(x => x.PistaNombre.Contains(nameFilterPista) || x.PistaCodigo.ToString() == nameFilterPista);
+            var filterUpper = nameFilterPista.ToUpper();
+            query = query.Where(x =>
+                x.PistaNombre.ToUpper().Contains(filterUpper) ||
+                x.PistaCodigo.ToString() == filterUpper
+            );
         }
         return query.ToList();
     }
