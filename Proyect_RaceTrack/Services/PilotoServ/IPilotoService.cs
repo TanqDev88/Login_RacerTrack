@@ -7,5 +7,4 @@ public interface IPilotoService
     void Update(Piloto obj);
     void Delete(int id);
     Piloto? GetById(int id);
-
 }

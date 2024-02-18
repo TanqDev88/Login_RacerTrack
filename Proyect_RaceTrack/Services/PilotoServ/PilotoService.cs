@@ -42,7 +42,12 @@ public class PilotoService : IPilotoService
 
         if (!string.IsNullOrEmpty(nameFilterIns))
         {
-            query = query.Where(x => x.PilotoNombre.Contains(nameFilterIns) || x.PilotoApellido.Contains(nameFilterIns) || x.PilotoDni.ToString() == nameFilterIns);
+            var filterUpper = nameFilterIns.ToUpper();
+            query = query.Where(x =>
+                x.PilotoApellido.ToUpper().Contains(filterUpper) ||
+                x.PilotoNombre.ToUpper().Contains(filterUpper) || 
+                x.PilotoDni.ToString() == filterUpper
+            );
         }
         return query.ToList();
 
