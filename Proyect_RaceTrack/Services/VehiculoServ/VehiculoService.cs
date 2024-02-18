@@ -34,27 +34,27 @@ public class VehiculoService : IVehiculoService
         var query = from vehiculo in _context.Vehiculo select vehiculo;
         return query.ToList();
     }
-    //OJO QUE ESTO ESTA AGREGADO DE PRUEBA
+
     public List<Vehiculo> GetAll(string NameFilterVeh)
     {
-        var query = from vehiculo in _context.Vehiculo select vehiculo;
+        IQueryable<Vehiculo> query = _context.Vehiculo;  
 
         if (!string.IsNullOrEmpty(NameFilterVeh))
         {
-            query = query.Where(x => x.VehiculoTipo.Contains(NameFilterVeh) || x.VehiculoMatricula.Contains(NameFilterVeh));
+            var filterUpper = NameFilterVeh.ToUpper();
+            query = query.AsEnumerable().Where(x =>
+                (x.VehiculoTipo != null && x.VehiculoTipo.ToString().ToUpper().Contains(filterUpper)) ||
+                (x.VehiculoMatricula != null && x.VehiculoMatricula.ToUpper().Contains(filterUpper))
+            ).AsQueryable();  
         }
+
         return query.ToList();
-
     }
-
-    // public void GetById(Aeronave obj)
-    // {
-    //     throw new NotImplementedException();
-    // }
 
     public Vehiculo? GetById(int id)
     {
         var vehiculo = _context.Vehiculo
+
             .FirstOrDefault(m => m.VehiculoId == id);
         return vehiculo;
     }

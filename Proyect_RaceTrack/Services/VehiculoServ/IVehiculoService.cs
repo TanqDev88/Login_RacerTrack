@@ -8,5 +8,4 @@ public interface IVehiculoService
     void Update(Vehiculo obj);
     void Delete(int id);
     Vehiculo? GetById(int id);
-
 }
