@@ -41,23 +41,18 @@ public class CocheraService : ICocheraService
 
         if (!string.IsNullOrEmpty(NameFilterCoc))
         {
-            query = query.Where(x => x.CocheraNombre.Contains(NameFilterCoc) || x.CocheraNumero.ToString() == NameFilterCoc);
+            var filterUpper = NameFilterCoc.ToUpper();
+            query = query.Where(x =>
+                x.CocheraNombre.ToUpper().Contains(filterUpper) ||
+                x.CocheraNumero.ToString() == filterUpper
+            );
         }
         return query.ToList();
 
     }
-
-    // public void GEtById(Hangar obj)
-    // {
-    //     throw new NotImplementedException();
-    // }
-
-
     public Cochera? GetById(int id)
     {
         var cochera = _context.Cochera
-                            // .Include(r => r.Pistas)
-                            // .FirstOrDefault(m => m.CocheraId == id);
                 .Include(r => r.Pistas)
                 .FirstOrDefault(m => m.CocheraId == id);
         return cochera;
