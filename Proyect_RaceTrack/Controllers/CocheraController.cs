@@ -11,6 +11,7 @@ using Proyect_RaceTrack.ViewModels.CocheraViewModels;
 using Proyect_RaceTrack.Services;
 using Proyect_RaceTrack.ViewModels;
 using Proyect_RaceTrack.ViewModels.PistaViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proyect_RaceTrack.Controllers
 {
@@ -26,6 +27,8 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Cochera
+        [Authorize(Roles = "Administrador, Jefe de pista")]
+
         public IActionResult Index(string NameFilterCoc)
         {
             var model = new CocheraIndexViewModel();
@@ -44,19 +47,10 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var cochera = _cocheraService.GetById(id.Value);
-            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (cochera == null)
             {
                 return NotFound();
             }
-
-            // var viewModel = new CocheraDetailViewModel();
-            // viewModel.CocheraNombre = cochera.CocheraNombre;
-            // viewModel.CocheraNumero = cochera.CocheraNumero;
-            // viewModel.CocheraSector = cochera.CocheraSector;
-            // viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
-            // viewModel.CocheraOficinas = cochera.CocheraOficinas;
-            //viewModel.Pistas = hangar.Pistas;
 
             return View(cochera);
         }
@@ -64,22 +58,18 @@ namespace Proyect_RaceTrack.Controllers
         // GET: Cochera/Create
         public IActionResult Create()
         {
-            // ViewData["Pistas"] = new SelectList(_context.Pista.ToList(),"PistaId","PistaNombre");
-            //ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
             ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
             return View();
         }
 
         // POST: Cochera/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] CocheraCreateViewModel cocheraView)
         {
             if (ModelState.IsValid)
             {
-                // var pistas = _context.Pista.Where(x=> hangarView.PistaIds.Contains(x.PistaId)).ToList();
+                var pistas = _pistaService.GetAll().Where(x => cocheraView.PistaIds.Contains(x.PistaId)).ToList();
 
                 var cochera = new Cochera
                 {
@@ -88,7 +78,7 @@ namespace Proyect_RaceTrack.Controllers
                     CocheraSector = cocheraView.CocheraSector,
                     CocheraAptoMantenimiento = cocheraView.CocheraAptoMantenimiento,
                     CocheraOficinas = cocheraView.CocheraOficinas,
-                    // Pistas = pistas
+                    Pistas = pistas
 
                 };
 
@@ -108,36 +98,64 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var cochera = _cocheraService.GetById(id.Value);
+            ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre");
+
             if (cochera == null)
             {
                 return NotFound();
             }
-            ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
-            return View(cochera);
+
+            var viewModel = new CocheraEditViewModel();
+            viewModel.CocheraId = cochera.CocheraId;
+            viewModel.CocheraNombre = cochera.CocheraNombre;
+            viewModel.CocheraNumero = cochera.CocheraNumero;
+            viewModel.CocheraSector = cochera.CocheraSector;
+            viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
+            viewModel.CocheraOficinas = cochera.CocheraOficinas;
+            viewModel.PistaIds = cochera.Pistas.Select(p => p.PistaId).ToList();
+            return View(viewModel);
         }
 
         // POST: Cochera/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] Cochera cochera)
+        public IActionResult Edit(int id, [Bind("CocheraId,CocheraNombre,CocheraNumero,CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] CocheraEditViewModel cocheraView)
         {
-            if (id != cochera.CocheraId)
+            if (id != cocheraView.CocheraId)
             {
                 return NotFound();
             }
-            //ModelState.Remove("Locales");
-            //ModelState.Remove("Talles");
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var cochera = _cocheraService.GetById(id);
+
+                    if (cochera == null)
+                    {
+                        return NotFound();
+                    }
+
+                    cochera.Pistas.Clear();
+
+                    cochera.CocheraNombre = cocheraView.CocheraNombre;
+                    cochera.CocheraNumero = cocheraView.CocheraNumero;
+                    cochera.CocheraSector = cocheraView.CocheraSector;
+                    cochera.CocheraAptoMantenimiento = cocheraView.CocheraAptoMantenimiento;
+                    cochera.CocheraOficinas = cocheraView.CocheraOficinas;
+
+                    var pistas = _pistaService.GetAll().Where(p => cocheraView.PistaIds.Contains(p.PistaId)).ToList();
+
+                    cochera.Pistas.AddRange(pistas);
+
                     _cocheraService.Update(cochera);
+
+                    return RedirectToAction("Index");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CocheraExists(cochera.CocheraId))
+                    if (!CocheraExists(id))
                     {
                         return NotFound();
                     }
@@ -146,10 +164,9 @@ namespace Proyect_RaceTrack.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
 
-            return View(cochera);
+            return View(cocheraView);
         }
 
         // GET: Cochera/Delete/5
