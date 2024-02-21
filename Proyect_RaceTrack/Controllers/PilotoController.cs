@@ -10,6 +10,7 @@ using Proyect_RaceTrack.Models;
 using Proyect_RaceTrack.ViewModels.PilotoViewModels;
 using Proyect_RaceTrack.Services;
 using Proyect_RaceTrack.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proyect_RaceTrack.Controllers
 {
@@ -22,17 +23,15 @@ namespace Proyect_RaceTrack.Controllers
             _pilotoService = pilotoService;
             _vehiculoService = vehiculoService;
         }
-
         // GET: Piloto
+        //Acceso autorizado para todos los perfiles
+        [Authorize(Roles = "Administrador, Propietario, Jefe de pista")]
         public IActionResult Index(string nameFilterIns)
         {
-            // var query = from instructor in _context.Instructor.Include(i => i.Aeronave) select instructor;
-
             var model = new PilotoIndexViewModel();
             model.pilotos = _pilotoService.GetAll(nameFilterIns);
 
             return View(model);
-
         }
 
         // GET: Piloto/Details/5
@@ -44,8 +43,6 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var piloto = _pilotoService.GetById(id.Value);
-                // .Include(p => p.Vehiculo)
-                // .FirstOrDefaultAsync(m => m.PilotoId == id);
             if (piloto == null)
             {
                 return NotFound();
@@ -57,7 +54,6 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
             viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
             viewModel.PilotoPropietario = piloto.PilotoPropietario;
-            //viewModel.Pi = piloto.PilotoEnActividad;
             viewModel.VehiculoId = piloto.VehiculoId;
             viewModel.Vehiculo = piloto.Vehiculo;
 
@@ -65,45 +61,40 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Piloto/Create
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Create()
         {
-            // ViewData["AeronaveId"] = new SelectList(_context.Aeronave, "AeronaveId", "AeronaveTipo",  "instructor.AeronaveId");
-            // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveId", "AeronaveTipo",  "instructor.AeronaveId", "nameFilter");
-            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
-            // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveId", "instructor.AeronaveId", "nameFilter");
-            // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveTipo",  "instructor.AeronaveId", "nameFilter");
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo");
             return View();
         }
 
-        // POST: Instructor/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Piloto/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietar, VehiculoId")] PilotoCreateViewModel pilotoView)
+        public IActionResult Create([Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietario, VehiculoId")] PilotoCreateViewModel pilotoView)
         {
             if (ModelState.IsValid)
             {
-                var instructor = new Piloto
+                var piloto = new Piloto
                 {
                     PilotoNombre = pilotoView.PilotoNombre,
                     PilotoApellido = pilotoView.PilotoApellido,
                     PilotoDni = pilotoView.PilotoDni,
-                    //PilotoTipoLicencia = pilotoView.InstructorTipoLicencia,
                     PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia,
                     PilotoExpedicion = pilotoView.PilotoExpedicion,
-                    //PilotoEnActividad = pilotoView.PilotoEnActividad,
+                    PilotoPropietario = pilotoView.PilotoPropietario,
                     VehiculoId = pilotoView.VehiculoId
-
                 };
-                _pilotoService.Create(instructor);
+
+                _pilotoService.Create(piloto);
                 return RedirectToAction(nameof(Index));
             }
-            // ViewData["AeronaveId"] = new SelectList(_context.Aeronave, "AeronaveId", "TipoAeronave",  "instructor.AeronaveId");
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo");
             return View(pilotoView);
         }
 
-        // GET: Instructor/Edit/5      
+        // GET: Piloto/Edit/5
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -112,35 +103,62 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var piloto = _pilotoService.GetById(id.Value);
-            //ViewData["VehiculoId"] = new SelectList(_contextVehiculo, "VehiculoId", "TipoVehiculo", "piloto.VehiculoId");
-            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
             if (piloto == null)
             {
                 return NotFound();
             }
-            return View(piloto);
+
+            var viewModel = new PilotoEditViewModel
+            {
+                PilotoId = piloto.PilotoId,
+                PilotoNombre = piloto.PilotoNombre,
+                PilotoApellido = piloto.PilotoApellido,
+                PilotoDni = piloto.PilotoDni,
+                PilotoNumeroLicencia = piloto.PilotoNumeroLicencia,
+                PilotoExpedicion = piloto.PilotoExpedicion,
+                PilotoPropietario = piloto.PilotoPropietario,
+                VehiculoId = piloto.VehiculoId,
+                Vehiculo = piloto.Vehiculo
+            };
+
+            // Obtén la lista de vehículos y la establece en el ViewBag
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", viewModel.VehiculoId);
+
+            return View(viewModel);
         }
-        // POST: Instructor/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        // POST: Piloto/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietar, VehiculoId")] Piloto piloto)
+        public IActionResult Edit(int id, [Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietario, VehiculoId")] PilotoEditViewModel pilotoView)
         {
-            if (id != piloto.PilotoId)
+            if (id != pilotoView.PilotoId)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var piloto = new Piloto
+                {
+                    PilotoId = pilotoView.PilotoId,
+                    PilotoNombre = pilotoView.PilotoNombre,
+                    PilotoApellido = pilotoView.PilotoApellido,
+                    PilotoDni = pilotoView.PilotoDni,
+                    PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia,
+                    PilotoExpedicion = pilotoView.PilotoExpedicion,
+                    PilotoPropietario = pilotoView.PilotoPropietario,
+                    VehiculoId = pilotoView.VehiculoId,
+                    Vehiculo = _vehiculoService.GetById(pilotoView.VehiculoId)
+                };
+
                 try
                 {
                     _pilotoService.Update(piloto);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PilotoExists(piloto.PilotoId))
+                    if (!PilotoExists(id))
                     {
                         return NotFound();
                     }
@@ -149,13 +167,15 @@ namespace Proyect_RaceTrack.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
 
-            return View(piloto);
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", pilotoView.VehiculoId);
+            return View(pilotoView);
         }
 
         // GET: Instructor/Delete/5
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -175,7 +195,6 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
             viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
             viewModel.PilotoPropietario = piloto.PilotoPropietario;
-            //viewModel.Pi = instructor.InstructorEnActividad;
             viewModel.VehiculoId = piloto.VehiculoId;
             viewModel.Vehiculo = piloto.Vehiculo;
 
