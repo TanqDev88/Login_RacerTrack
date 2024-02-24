@@ -1,63 +1,65 @@
-# Proyect RacerTrack
->  In this repository there is the project corresponding to a management system for a car park that has free lane functionality.
----
+# Proyecto Racer Track
+***
+
+![Image text](https://www.competirclaroquesi.com.ar/images/Emiliozzi_1.jpg)
+
+En este repositorio se encuentra el proyecto correspondiente al segundo parcial, el mismo consiste en un sistema de gestion de un autodoromo que cuenta con la funcionalidad de pista libre.
+
+## Contenido
+1. [Informacion general](#general-info)
+2. [Tecnologias](#technologies)
+3. [Instalacion](#installation)
+4. [Uso de buscadores](#search)
+5. [Funcionalidad](#functionality)
+6. [Gestion de roles](#roles)
 
 
-![Image text](https://i0.wp.com/www.revistaracingcar.com/wp-content/uploads/2015/10/TC-2000-FOTO-PRESENTACION.jpg)
+<a name="general-info"></a>
+## Informacion General 
+***
+La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la gestión de pistas y  nomina de pilotos/propietarios de vehiculos para su uso dentro del autodromo (desde sus datos personales hasta la asignación de vehiculos, pistas y cocheras.  El proyecto se encuentra aun aun en proceso de desarrollo pero ya cuenta con los siguientes ABM donde se puede crear, editar, observar detalle y eliminar registros, una funcionalidad de autenticacion y registro de usuarios llegando hasta el desarrollo de una funcionalidad de calculo de costos para el uso de la pista libre por horas. 
+### Menu principal
 
-## Content
-* [General information](#introduccion)
-* [Technologies](#technologies)
-* [Project installation](#installation)
----
-
-
-<a name="introduccion"></a> 
-
-
-## Project status 🚧 
+## Estado del Proyecto 🚧 
 <details>
-    <summary>Click Here for Detail ↩️</summary>
+    <summary>Click Aquí para Detalle ↩️</summary>
     <br>
-   <p align="justify">The project is currently in development. Although the main management functionalities of Drivers, Tracks, Garages, Vehicles and authentication are already ready, along with the main functionality which is the free track calculator, with respect to security, in the short term an ABM will be developed that will allow the creation of different roles to enter the system and restrict functionalities based on these🔨 </p>
+   <p align="justify">El proyecto se encuentra actualmente en desarrollo. Aunque ya se encuentran listas las funcionalidades principales de administración de Pilotos, Pistas, Cocheras, Vehiculos y autenticacion junto con la funcionalidad principal que es la calculadora de pista libre y , respecto a la seguridad en el corto plazo se desarrollara un ABM que permitira la creacion de distintos roles para ingresar al sistema y restringir funcionalidades en base a estos🔨 </p>
    </details>
    <hr>
 
-
- <a name="preguntas"></a> 
 <a name="technologies"></a> 
-   ## Used technology  💻 
+   ## Tecnologías Utilizadas  💻 
    
 <details>
-    <summary>Click Here for Detail ↩️</summary>
+    <summary>Click Aquí para Detalle ↩️</summary>
     <br>
-   <p>Used technology:</p>
+   <p>Tecnologías Utilizadas:</p>
 <ul>
-    <li>CSS: <a href="https://lenguajecss.com/css/">Link to the official language documentation</a></li>
-  <li>HTML5: <a href="https://lenguajehtml.com/html/">Link to the official language documentation</a></li>
-    <li>C#: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Link to the official language documentation</a></li>
-  <li>VS Code: <a href="https://code.visualstudio.com/">Link to the official page</a></li>
-  <li>Bootstrap: <a href="https://getbootstrap.com/docs/">ELink to the official page</a></li>
-  <li>Razor Pages: <a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0">Link to the official page</a></li>
+  <li>Bootstrap: <a href="https://getbootstrap.com/docs/">Enlace a la documentación oficial</a></li>
+  <li>Razor Pages: <a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0">Enlace a la documentación oficial</a></li>
+  <li>C#: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Enlace a la documentación oficial</a></li>
 </ul>
 
    </details>
    <hr>
 
-<a name="installation"></a>    
-## Project installation
-1 - Clone the project from the following Github URL. 
+ <a name="installation"></a>  
+## Instalacion del proyecto
+***
+Clonar el proyecto desde la siguiente URL de Github. 
 ```
-$ git clone https://github.com/Tanqueta88/Login_RacerTrack.git
+$ git clone https://github.com/jorgedan88/herramientas-parcial1-OliveraJorgeDaniel.git
 
 ```
-2 - Install the following tools globally:
+
+Instalar las siguientes herramientas de manera global:
 ```
 dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet tool install --global dotnet-ef
 
 ```
-3 - Install the following tools locally:
+Instalar las siguientes herramientas de manera local:
 ```
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Microsoft.EntityFrameworkCore.SQLite
@@ -65,41 +67,89 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Tools
 
 ```
-4 - From the folder where the project was cloned, run the following command to run it:
+Desde la carpeta donde se clono el proyecto ejecutar el siguiente comando para ejecutarlo. 
 ```
 dotnet run
 
 ```
 
-   ## Free-runway calculation  📖🖍️
+<a name="search"></a> 
+   ## Uso de buscadores  💻 
+   
+<details>
+    <summary>Click Aquí para Detalle ↩️</summary>
+    <br>
+   <p>Funcionamiento de buscadores por ABM:</p>
+<ul>
+  <li>Pantalla Pilotos:</li>
+    - Filtra por nombre (case sensitive), apellido (case sensitive) y DNI (Valor exacto)
+  <li>Pantalla Vehiculos:</li>
+    - Funciona por Tipo de vehículo  (case sensitive) y Matrícula (Valor exacto) 
+  <li>Pantalla Cocheras:</li>
+    - Funciona por Nombre (case sensitive) y Numero (Valor exacto)
+  <li>Pantalla Pistas:</li>
+    - Funciona por Nombre (case sensitive) y Nomenclatura (Valor exacto)
+</ul>
+
+   </details>
+   <hr>
+
+
+ <a name="functionality"></a>  
+   ## Calculo de pista libre  📖🖍️
 
 
 <details>
-    <summary>Click Here for Detail ↩️</summary>
+    <summary>Click Aquí para Detalle ↩️</summary>
     <br>
-   <p>Functionality:</p>
+   <p>Funcionalidad:</p>
 <ul>
-  <li>The system has a working calculator although open to future improvements whose operation is as follows:<br>
-
-STEPS<br>
-1- Log in to the Racer Track system<br>
-2- From the main menu enter the calculator tab.<br>
-3- On the calculator screen, complete the following fields:<br>
-
-   - Enter the value in Argentine pesos of the liter of fuel.<br>
-   - Enter the consumption in liters per hour of the vehicle (a table with these values will be implemented soon for this functionality)<br>
-   - Select the competition category of the vehicle to use among the following: . Single-seater (Adds $3000 to the hourly value). GT (Adds $4000 to the hourly value) . Track Tourism (Adds $4500 to the hourly value). Stop Car (Adds $5500 to hourly value) . Rally (Add $7000 to hourly value)<br>
-   - In the case of hiring an instructor, activate the check (if activated, it adds $5000 to the hourly value)<br>
+  <li>El sistema cuenta con una calculadora en funcionamiento aunque abierta a mejoras a futuro cuyo funcionamiento es el siguiente:<br>
   
-4- To perform the calculation press the calculate button.<br>
-5- If you want to make another calculation, press the "Clear" button <br>
-6- If you want to return to the main menu, press the "Back" button</a></li><br>
-   </ul>
+  PASOS<br>
+1- Loguearse en el sistema Racer Track<br> 
+2- Desde el menu principal ingresar a la pestaña calculadora.<br> 
+3- En la pantalla calculadora campletar los siguientes campos:<br>
 
-Example case:<br>
-to. A fuel cost of 20 is entered with a consumption per hour of 1<br>
-b. Select the Single-seat category which adds 3000 to the calculation<br>
-c. The assistance of an instructor is requested which adds 5000 to the calculation<br>
-d. The cost of the free track hour must be 8020.00<br>
-    </details>
-    <hr>
+  - Ingresar el valor en pesos Argentinos del litro de combustible.<br>
+  - Ingresar el consumo en litros por hora del vehiculo (proximamente se implementara una tabla con estos valores para esta funcionalidad)<br>
+  - Seleccionar la categoria de competición del vehiculo a utilizar entre las siguientes: . Monoplaza (Agrega $3000 al valor hora) . GT (Agrega $4000 al valor hora) . Turismo Pista     (Agrega $4500 al valor hora) . Stop Car (Agrega $5500 al valor hora) . Rally (Agrega $7000 al valor hora)<br>
+  - En el caso de contratar un instructor activar el check (el mismo de estar activado agrega $5000 al valor hora)<br>
+  
+4- Para realizar el calculo presione el botón calcular.<br> 
+5- Si se decea realizar otro calculo presionar el boton "Limpiar" <br>
+6- Si se desea volver al menu principal presionar el boton "Volver"</a></li><br>
+  </ul>
+
+Caso ejemplo:<br>
+a. Se ingresa un costo de combustible de 20 con un consumo por hora de 1<br>
+b. Se seleccionar la categoria Monoplaza la cual le agrega al cálculo 3000<br>
+c. Se solicita la asistencia de un instructor lo cual le agrega al cálculo 5000<br>
+
+d. El costo de la hora de pista libre debe ser de 8020.00<br>
+   </details>
+   <hr>
+
+ <a name="roles"></a>  
+   ## Gestion de roles para usuarios del sistema  💻 
+   
+<details>
+    <summary>Click Aquí para Detalle ↩️</summary>
+    <br>
+   <p>Roles disponibles en el sistema:</p>
+<ul>
+    <strong> Importante: Al crear un nuevo usuario para que el mismo tenga acceso a los módulos del sistema un administrador deberá asignarle un rol. </strong><br>
+    
+<li>Propietario:</li>
+    - Rol que permite al usuario el acceso total a todos lo módulos del sistema y ejecutar todas las acciones de estas pantallas.
+<li>Encargado de pista:</li>
+    - Rol que permite al usuario el acceso a los módulos Pilotos, Vehículos, Cocheras y Pistas con ejecución de todas las acciones de los ABM’s de estas pantallas.
+<li>Administrador:</li>
+    - Solo permite el acceso a los módulos Pilotos y Vehículos pero no la creación o edición de los registros de estas pantallas (Usuario del tipo consulta)
+</ul>
+
+   </details>
+   <hr>
+
+
+
