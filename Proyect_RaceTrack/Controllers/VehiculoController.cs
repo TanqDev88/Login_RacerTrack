@@ -1,14 +1,6 @@
-//using Proyect_RaceTrack.ViewModels;
-//using Proyect_RaceTrack.ViewModels.PistaViewModels;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
 
 using Proyect_RaceTrack.Services;
@@ -27,6 +19,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Vehiculo
+        [Authorize(Roles = "Administrador, Propietario, Jefe de pista")]
         public IActionResult Index(string NameFilterVeh)
         {
             var model = new VehiculoIndexViewModel();
@@ -45,7 +38,6 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var vehiculo = _vehiculoService.GetById(id.Value);
-            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (vehiculo == null)
             {
                 return NotFound();
@@ -61,14 +53,13 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Vehiculo/Create
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Vehiculo/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] VehiculoCreateViewModel vehiculoView)
@@ -91,6 +82,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Vehiculo/Edit/5
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -103,27 +95,41 @@ namespace Proyect_RaceTrack.Controllers
             {
                 return NotFound();
             }
-            return View(vehiculo);
+
+            var viewModel = new VehiculoEditViewModel();
+            viewModel.VehiculoId = vehiculo.VehiculoId;
+            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
+            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
+            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
+            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
+
+            return View(viewModel);
         }
 
         // POST: Vehiculo/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] Vehiculo vehiculo)
+        public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] VehiculoEditViewModel vehiculoView)
         {
-            if (id != vehiculo.VehiculoId)
+            if (id != vehiculoView.VehiculoId)
             {
                 return NotFound();
             }
-            //ModelState.Remove("Locales");
-            //ModelState.Remove("Talles");
+
             if (ModelState.IsValid)
             {
+                var vehiculo = new Vehiculo();
+                vehiculo.VehiculoId = vehiculoView.VehiculoId;
+                vehiculo.VehiculoNombre = vehiculoView.VehiculoNombre;
+                vehiculo.VehiculoApellido = vehiculoView.VehiculoApellido;
+                vehiculo.VehiculoMatricula = vehiculoView.VehiculoMatricula;
+                vehiculo.VehiculoFabricacion = vehiculoView.VehiculoFabricacion;
+                vehiculo.VehiculoTipo = vehiculoView.VehiculoTipo;
+            
                 try
                 {
-                    _vehiculoService.Update(vehiculo);
+                _vehiculoService.Update(vehiculo);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -136,14 +142,14 @@ namespace Proyect_RaceTrack.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-
-            return View(vehiculo);
+            return View(vehiculoView);
         }
 
 
         // GET: Vehiculo/Delete/5
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -184,49 +190,6 @@ namespace Proyect_RaceTrack.Controllers
         private bool VehiculoExists(int id)
         {
             return _vehiculoService.GetById(id) != null;
-        }
-        //FUNCIONALIDAD /
-        public IActionResult UpdatePrice(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var vehiculo = _vehiculoService.GetById(id.Value);
-            if (vehiculo == null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = new MenuUpdatePriceViewModel
-            {
-                VehiculoCosto = vehiculo.VehiculoCosto,
-                VehiculoId = vehiculo.VehiculoId,
-                VehiculoTipo = vehiculo.VehiculoTipo,
-            };
-
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult UpdatePrice(MenuUpdatePriceViewModel model)
-        {
-            var vehiculo = _vehiculoService.GetById(model.VehiculoId);
-            if (vehiculo == null)
-            {
-                return NotFound();
-            }
-            if (model.Cantidad > 0)
-            {
-                vehiculo.VehiculoCosto = (model.Cantidad * vehiculo.VehiculoCosto) + model.Instruccion;
-                _vehiculoService.Update(vehiculo); 
-
-            }
-
-            return RedirectToAction("Index");
-        }
-
+        }   
     }
 }
