@@ -14,7 +14,8 @@ body {
 }
 
 header {
-  background-color: rgb(255, 0, 13);
+  /* background-color: rgb(255, 0, 13); */
+  background-color: rgb(193, 192, 212);
   height: 100px;
 }
 
