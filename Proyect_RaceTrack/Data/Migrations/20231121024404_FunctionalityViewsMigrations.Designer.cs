@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proyect_RaceTrack.Data;
 
@@ -10,9 +11,11 @@ using Proyect_RaceTrack.Data;
 namespace Proyect_RaceTrack.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231121024404_FunctionalityViewsMigrations")]
+    partial class FunctionalityViewsMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -341,19 +344,30 @@ namespace Proyect_RaceTrack.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("VehiculoApellido")
+                        .IsRequired()
+                        .HasMaxLength(15)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("VehiculoCosto")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("VehiculoFabricacion")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("VehiculoMatricula")
+                        .IsRequired()
+                        .HasMaxLength(7)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("VehiculoNombre")
+                        .IsRequired()
+                        .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("VehiculoTipo")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("VehiculoTipo")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("VehiculoId");
 

@@ -24,6 +24,7 @@ namespace Proyect_RaceTrack.Controllers
             _vehiculoService = vehiculoService;
         }
         // GET: Piloto
+        //Acceso autorizado para todos los perfiles
         [Authorize(Roles = "Administrador, Propietario, Jefe de pista")]
         public IActionResult Index(string nameFilterIns)
         {
@@ -120,6 +121,7 @@ namespace Proyect_RaceTrack.Controllers
                 Vehiculo = piloto.Vehiculo
             };
 
+            // Obtén la lista de vehículos y la establece en el ViewBag
             ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", viewModel.VehiculoId);
 
             return View(viewModel);
