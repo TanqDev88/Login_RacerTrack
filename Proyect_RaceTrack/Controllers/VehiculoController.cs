@@ -19,7 +19,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Vehiculo
-        [Authorize(Roles = "Administrador, Propietario, Jefe de pista")]
+
         public IActionResult Index(string NameFilterVeh)
         {
             var model = new VehiculoIndexViewModel();
@@ -126,10 +126,10 @@ namespace Proyect_RaceTrack.Controllers
                 vehiculo.VehiculoMatricula = vehiculoView.VehiculoMatricula;
                 vehiculo.VehiculoFabricacion = vehiculoView.VehiculoFabricacion;
                 vehiculo.VehiculoTipo = vehiculoView.VehiculoTipo;
-            
+
                 try
                 {
-                _vehiculoService.Update(vehiculo);
+                    _vehiculoService.Update(vehiculo);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -190,6 +190,6 @@ namespace Proyect_RaceTrack.Controllers
         private bool VehiculoExists(int id)
         {
             return _vehiculoService.GetById(id) != null;
-        }   
+        }
     }
 }

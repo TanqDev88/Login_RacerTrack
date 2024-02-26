@@ -20,6 +20,6 @@ namespace Proyect_RaceTrack.Models
         [Display(Name = "Oficinas")]
         public bool CocheraOficinas { get; set; } = true;
         public virtual List<Pista>? Pistas { get; set; }
-        
+
     }
 }

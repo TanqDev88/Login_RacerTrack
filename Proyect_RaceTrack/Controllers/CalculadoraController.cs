@@ -23,7 +23,7 @@ namespace Proyect_RaceTrack.Controllers
         [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Index()
         {
-            return _context.Calculadora != null ? 
+            return _context.Calculadora != null ?
                         View(await _context.Calculadora.ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.Calculadora'  is null.");
         }

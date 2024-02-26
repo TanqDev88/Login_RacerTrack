@@ -160,7 +160,7 @@ namespace Proyect_RaceTrack.Controllers
             }
             return View(pistaView);
         }
-        
+
         public IActionResult Delete(int? id)
         {
             if (id == null)

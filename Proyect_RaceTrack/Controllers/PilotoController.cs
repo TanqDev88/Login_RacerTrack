@@ -25,7 +25,7 @@ namespace Proyect_RaceTrack.Controllers
         }
         // GET: Piloto
         //Acceso autorizado para todos los perfiles
-        [Authorize(Roles = "Administrador, Propietario, Jefe de pista")]
+        // [Authorize(Roles = "Administrador, Propietario, Jefe de pista")]
         public IActionResult Index(string nameFilterIns)
         {
             var model = new PilotoIndexViewModel();
