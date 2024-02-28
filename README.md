@@ -150,7 +150,8 @@ d. El costo de la hora de pista libre debe ser de 8020.00<br>
 
    </details>
    <hr>
-Usuarios para pruebas:
+
+ ## 💻 Usuarios para pruebas:
 
 ADMINISTRADOR:
 USER:admin@adimn.com
