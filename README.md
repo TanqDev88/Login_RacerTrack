@@ -3,31 +3,30 @@
 
 ![Image text](https://www.competirclaroquesi.com.ar/images/Emiliozzi_1.jpg)
 
-En este repositorio se encuentra el proyecto correspondiente al segundo parcial, el mismo consiste en un sistema de gestion de un autodoromo que cuenta con la funcionalidad de pista libre.
+In this repository there is the project corresponding to the second partial, it consists of a management system for a car dome that has free lane functionality.
 
-## Contenido
-1. [Informacion general](#general-info)
-2. [Tecnologias](#technologies)
-3. [Instalacion](#installation)
-4. [Uso de buscadores](#search)
-5. [Funcionalidad](#functionality)
-6. [Gestion de roles](#roles)
+## Content
+1. [General information](#general-info)
+2. [Technologies](#technologies)
+3. [Installation](#installation)
+4. [Use of search engines](#search)
+5. [Functionality](#functionality)
+6. [Role Management](#roles)
 
 
 <a name="general-info"></a>
-## Informacion General 
+## General information
 ***
-La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la gestión de pistas y  nomina de pilotos/propietarios de vehiculos para su uso dentro del autodromo (desde sus datos personales hasta la asignación de vehiculos, pistas y cocheras.  El proyecto se encuentra aun aun en proceso de desarrollo pero ya cuenta con los siguientes ABM donde se puede crear, editar, observar detalle y eliminar registros, una funcionalidad de autenticacion y registro de usuarios llegando hasta el desarrollo de una funcionalidad de calculo de costos para el uso de la pista libre por horas. 
-### Menu principal
+The application belonging to the "Racer Track" autodrome aims to manage tracks and list drivers/vehicle owners for use within the autodrome (from their personal data to the assignment of vehicles, tracks and garages. The project is still still in the development process but it already has the following ABM where you can create, edit, observe details and delete records, a user authentication and registration functionality, reaching the development of a cost calculation functionality for the use of the track free for hours.
+### Main menu
 
-## Estado del Proyecto 🚧 
+## Project Status 🚧
 <details>
-    <summary>Click Aquí para Detalle ↩️</summary>
-    <br>
-   <p align="justify">El proyecto se encuentra actualmente en desarrollo. Aunque ya se encuentran listas las funcionalidades principales de administración de Pilotos, Pistas, Cocheras, Vehiculos y autenticacion junto con la funcionalidad principal que es la calculadora de pista libre y , respecto a la seguridad en el corto plazo se desarrollara un ABM que permitira la creacion de distintos roles para ingresar al sistema y restringir funcionalidades en base a estos🔨 </p>
-   </details>
-   <hr>
-
+     <summary>Click Here for Detail ↩️</summary>
+     <br>
+    <p align="justify">The project is currently in development. Although the main management functionalities of Drivers, Tracks, Garages, Vehicles and authentication are already ready, along with the main functionality, which is the free track calculator, with respect to security, in the short term an ABM will be developed that will allow the creation of different roles to enter the system and restrict functionalities based on these🔨 </p>
+    </details>
+    <hr>
 <a name="technologies"></a> 
    ## Tecnologías Utilizadas  💻 
    
