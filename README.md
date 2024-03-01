@@ -18,7 +18,6 @@ In this repository there is the project corresponding to the second partial, it 
 ## General information
 ***
 The application belonging to the "Racer Track" autodrome aims to manage tracks and list drivers/vehicle owners for use within the autodrome (from their personal data to the assignment of vehicles, tracks and garages. The project is still still in the development process but it already has the following ABM where you can create, edit, observe details and delete records, a user authentication and registration functionality, reaching the development of a cost calculation functionality for the use of the track free for hours.
-### Main menu
 
 ## Project Status 🚧
 <details>
@@ -27,38 +26,38 @@ The application belonging to the "Racer Track" autodrome aims to manage tracks a
     <p align="justify">The project is currently in development. Although the main management functionalities of Drivers, Tracks, Garages, Vehicles and authentication are already ready, along with the main functionality, which is the free track calculator, with respect to security, in the short term an ABM will be developed that will allow the creation of different roles to enter the system and restrict functionalities based on these🔨 </p>
     </details>
     <hr>
-<a name="technologies"></a> 
-   ## Tecnologías Utilizadas  💻 
+
+   ## Technologies Used 💻
    
 <details>
-    <summary>Click Aquí para Detalle ↩️</summary>
+    <summary>Click Here for Detail ↩️</summary>
     <br>
-   <p>Tecnologías Utilizadas:</p>
+   <p>Technologies Used:</p>
 <ul>
-  <li>Bootstrap: <a href="https://getbootstrap.com/docs/">Enlace a la documentación oficial</a></li>
-  <li>Razor Pages: <a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0">Enlace a la documentación oficial</a></li>
-  <li>C#: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Enlace a la documentación oficial</a></li>
+  <li>Bootstrap: <a href="https://getbootstrap.com/docs/">Link to official documentation</a></li>
+   <li>Razor Pages: <a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0">Link to official documentation</a> </li>
+   <li>C#: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Link to official documentation</a></li>
 </ul>
 
    </details>
    <hr>
 
  <a name="installation"></a>  
-## Instalacion del proyecto
+## Project installation
 ***
-Clonar el proyecto desde la siguiente URL de Github. 
+Clone the project from the following Github URL.
 ```
 $ git clone https://github.com/jorgedan88/herramientas-parcial1-OliveraJorgeDaniel.git
 
 ```
 
-Instalar las siguientes herramientas de manera global:
+Install the following tools globally:
 ```
 dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet tool install --global dotnet-ef
 
 ```
-Instalar las siguientes herramientas de manera local:
+Install the following tools locally:
 ```
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Microsoft.EntityFrameworkCore.SQLite
@@ -66,7 +65,7 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Tools
 
 ```
-Desde la carpeta donde se clono el proyecto ejecutar el siguiente comando para ejecutarlo. 
+From the folder where the project was cloned, run the following command to run it.
 ```
 dotnet run
 
