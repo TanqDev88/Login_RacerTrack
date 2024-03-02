@@ -27,7 +27,8 @@ The application belonging to the "Racer Track" autodrome aims to manage tracks a
     </details>
     <hr>
 
-   ## Technologies Used 💻
+<a name="technologies"></a>
+## Technologies Used 💻
    
 <details>
     <summary>Click Here for Detail ↩️</summary>
@@ -146,9 +147,6 @@ d. The cost of the free track hour must be 8020.00<br>
      - Only allows access to the Drivers and Vehicles modules but not the creation or editing of the records of these screens (Query type user)
 </ul>
 
-   </details>
-   <hr>
-
 ## 💻 Users for testing:
 
 ### ADMINISTRATOR:
@@ -162,5 +160,10 @@ d. The cost of the free track hour must be 8020.00<br>
 ### OWNER:
 - **Usuario:** propietario@dominio.com
 - **Contraseña:** 3KTU_Ffub5s-ZFd
+
+   </details>
+   <hr>
+
+
 
 
