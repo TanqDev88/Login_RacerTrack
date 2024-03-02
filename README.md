@@ -129,36 +129,38 @@ d. The cost of the free track hour must be 8020.00<br>
     <hr>
 
  <a name="roles"></a>  
-   ## Gestion de roles para usuarios del sistema  💻 
+## Role management for system users 💻
    
 <details>
-    <summary>Click Aquí para Detalle ↩️</summary>
-    <br>
-   <p>Roles disponibles en el sistema:</p>
+     <summary>Click Here for Detail ↩️</summary>
+     <br>
+    <p>Roles available in the system:</p>
 <ul>
-    <strong> Importante: Al crear un nuevo usuario para que el mismo tenga acceso a los módulos del sistema un administrador deberá asignarle un rol. </strong><br>
+     <strong>Important: When creating a new user so that he or she has access to the system modules, an administrator must assign him or her a role. </strong><br>
     
-<li>Propietario:</li>
-    - Rol que permite al usuario el acceso total a todos lo módulos del sistema y ejecutar todas las acciones de estas pantallas.
-<li>Encargado de pista:</li>
-    - Rol que permite al usuario el acceso a los módulos Pilotos, Vehículos, Cocheras y Pistas con ejecución de todas las acciones de los ABM’s de estas pantallas.
-<li>Administrador:</li>
-    - Solo permite el acceso a los módulos Pilotos y Vehículos pero no la creación o edición de los registros de estas pantallas (Usuario del tipo consulta)
+<li>Owner:</li>
+     - Role that allows the user full access to all system modules and execute all actions on these screens.
+<li>Rink manager:</li>
+     - Role that allows the user access to the Drivers, Vehicles, Garages and Tracks modules with execution of all the ABM actions on these screens.
+<li>Administrator:</li>
+     - Only allows access to the Drivers and Vehicles modules but not the creation or editing of the records of these screens (Query type user)
 </ul>
 
    </details>
    <hr>
 
- ## 💻 Usuarios para pruebas:
+## 💻 Users for testing:
 
-ADMINISTRADOR:
-USER:admin@adimn.com
-PASS:PmU3.UCj3pPt-rp
-JEFE DE PISTA:
-USER:hp@gmail.com
-PASS:.w_Q93GWDNJvivu
-PROPIETARIO:
-USER:owner@owner.com
-PASS: 3KTU_Ffub5s-ZFd
+### ADMINISTRATOR:
+- **Usuario:** admin@admin.com
+- **Contraseña:** PmU3.UCj3pPt-rp
+
+### RINGMASTER:
+- **Usuario:** jefe@pista.com
+- **Contraseña:** .w_Q93GWDNJvivu
+
+### OWNER:
+- **Usuario:** propietario@dominio.com
+- **Contraseña:** 3KTU_Ffub5s-ZFd
 
 
